@@ -2,24 +2,33 @@
 #include "../lib/json.hpp"
 #include <iostream>
 #include <fstream>
+#include <string>
 
-using json = nlohmann::json;
 using namespace std;
+using json = nlohmann::json;
 
 Consommable::Consommable(){
+    nom = "";
     dure = 0;
     pv = 0;
     force = 0;
     resistance = 0;
 }
 
-void Consommable::genereConsommable(vector<Consommable> * v){
-    vector<string> FileName = {"potion.json"};
-    string FilePath = "../data/consommable";
+Consommable::Consommable(string n, int d, int p, int f, int r){
+    nom = n;
+    dure = d;
+    pv = p;
+    force = f;
+    resistance =r;
+}
 
-    for(int i = 0; i < FileName.size(); i++){
-        fstream f;
-    }
+Consommable::~Consommable(){
+
+}
+
+string Consommable::getNom(){
+    return nom;
 }
 
 int Consommable::getDure(){
@@ -36,4 +45,20 @@ int Consommable::getForce(){
 
 int Consommable::getResistance(){
     return resistance;
+}
+
+void Consommable::genereConsommable(string FileName){
+    string FilePath = "data/consommable/" + FileName;
+
+    cout << FilePath << endl;
+
+    ifstream file(FilePath);
+
+    json Doc = json::parse(file);
+
+    nom = {Doc["nom"]};
+    dure = {Doc["dure"]};
+    pv = {Doc["pv"]};
+    force = {Doc["force"]};
+    resistance = {Doc["resistance"]};
 }

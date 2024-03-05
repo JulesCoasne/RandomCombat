@@ -2,6 +2,10 @@
 #define CONSOMMABLE_H
 #endif
 
+#include <string>
+
+using namespace std;
+
 class Consommable{
     private:
     string nom;
@@ -9,15 +13,17 @@ class Consommable{
 
     public:
     Consommable();
+    Consommable(string n, int d, int p, int f, int r);
     ~Consommable();
 
     /**
      * @brief charge un consommble précréer
     */
-    void genereConsommable(vector<Consommable> * v);
     string getNom();
     int getDure();
     int getPV();
     int getForce();
     int getResistance();
+
+    void genereConsommable(string FileName);
 };
