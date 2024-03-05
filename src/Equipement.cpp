@@ -1,6 +1,6 @@
 #include "Equipement.h"
 #include <cstdlib> 
-#include <fstream>
+#include <iostream>
 
 
 using namespace std;

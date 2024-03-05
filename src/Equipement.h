@@ -1,7 +1,7 @@
 #ifndef EQUIPEMENT_H
 #define _EQUIPEMENT_H
 #endif
-#include <fstream>
+#include <iostream>
 
 
 using namespace std;
