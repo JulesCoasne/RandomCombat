@@ -11,6 +11,8 @@ class Jeu{
 
     public:
     Jeu();
+    ~Jeu();
+    
     Consommable getConsommable(int index);
     int nouvellePartie();
 };
