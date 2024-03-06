@@ -19,26 +19,18 @@ Competence::Competence(int stat, bool estSoin) {
     }
 }
 
-Competence::~Competence(){
-    
-}
-
-void Competence::genereCompetence(string FileName){
-    string FilePath = "data/competence/" + FileName;
-
-    cout << FilePath << endl;
-
-    ifstream file(FilePath);
+Competence::Competence(nomCompetence n){
+    string path = filePath +jsonCompetence[n];
+    ifstream file(path);
 
     json Doc = json::parse(file);
 
-    bool estSoin = {Doc["soin"]};
-    int stat = {Doc["stat"]};
+    degat = {Doc["degat"]};
+    soin = {Doc["soin"]};
+}
 
-    Competence c = Competence(stat, estSoin);
-
-    degat = c.degat;
-    soin = c.soin;
+Competence::~Competence(){
+    
 }
 
 int Competence::getDegat() const {
