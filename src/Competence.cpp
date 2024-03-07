@@ -40,3 +40,8 @@ int Competence::getDegat() const {
 int Competence::getSoin() const {
     return soin;
 }
+
+void useCompetence(const Personnage &p, int force){
+    p.updatePV(-(degat * force));
+    p.updatePV(soin);
+}

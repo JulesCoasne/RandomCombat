@@ -5,12 +5,3 @@
 #include "Personnage.h"
 #include <vector>
 #include <string>
-
-class Jeu{
-    public:
-
-    Jeu();
-    ~Jeu();
-    
-    int nouvellePartie();
-};

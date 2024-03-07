@@ -2,6 +2,8 @@
 #define _COMPETENCE_H
 #endif
 
+#include "Personnage.h"
+#include "Ennemi.h"
 #include <string>
 #include <vector>
 
@@ -9,9 +11,6 @@ using namespace std;
 
 class Competence {
 private:
-    const enum nomCompetence{
-        COUP_DE_POING
-    };
 
     const string filePath = "data/competence/";
     const vector<string> jsonCompetence = {"coup_de_poing.json"};
@@ -20,6 +19,11 @@ private:
     int soin;
 
 public:
+
+    const enum nomCompetence{
+        COUP_DE_POING
+    };
+    
     Competence();
     Competence(int stat, bool estSoin);
     Competence(nomCompetence c);
@@ -27,5 +31,8 @@ public:
     
     int getDegat() const;
     int getSoin() const;
+
+    void useCompetence(const Personnage &p);
+    void useCompetence(const Ennemi &e); 
 };
 

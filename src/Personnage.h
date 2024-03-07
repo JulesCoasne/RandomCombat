@@ -5,7 +5,6 @@
 #include <string>
 
 #include "Competence.h"
-
 #include "Inventaire.h"
 
 using namespace std;
@@ -22,15 +21,15 @@ private:
 public:
     Personnage(const string &nom);
 
-
     string getNom() const;
     int getPV() const;
     int getForce() const;
     int getResistance() const;
+
     void updatePV(int update);
     void updateForce(int update);
     void updateResistance(int update);
-    void useCompetence(const Competence& comp);
+
     bool isDead() const;
 };
 
