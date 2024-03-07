@@ -15,6 +15,19 @@ Consommable::Consommable(){
     resistance = 0;
 }
 
+Consommable::Consommable(nomConsommable c){
+    string path = filePath + jsonConsommable[c];
+    ifstream file(path);
+
+    json Doc = json::parse(file);
+
+    nom = {Doc["nom"]};
+    dure = {Doc["dure"]};
+    pv = {Doc["pv"]};
+    force = {Doc["force"]};
+    resistance = {Doc["resistance"]};
+}
+
 Consommable::Consommable(string n, int d, int p, int f, int r){
     nom = n;
     dure = d;
@@ -45,20 +58,4 @@ int Consommable::getForce(){
 
 int Consommable::getResistance(){
     return resistance;
-}
-
-void Consommable::genereConsommable(string FileName){
-    string FilePath = "data/consommable/" + FileName;
-
-    cout << FilePath << endl;
-
-    ifstream file(FilePath);
-
-    json Doc = json::parse(file);
-
-    nom = {Doc["nom"]};
-    dure = {Doc["dure"]};
-    pv = {Doc["pv"]};
-    force = {Doc["force"]};
-    resistance = {Doc["resistance"]};
 }

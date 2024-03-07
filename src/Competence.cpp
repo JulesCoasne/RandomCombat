@@ -19,8 +19,8 @@ Competence::Competence(int stat, bool estSoin) {
     }
 }
 
-Competence::Competence(nomCompetence n){
-    string path = filePath +jsonCompetence[n];
+Competence::Competence(nomCompetence c){
+    string path = filePath +jsonCompetence[c];
     ifstream file(path);
 
     json Doc = json::parse(file);

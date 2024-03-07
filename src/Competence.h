@@ -22,7 +22,7 @@ private:
 public:
     Competence();
     Competence(int stat, bool estSoin);
-    Competence(enum nomCompetence);
+    Competence(nomCompetence c);
     ~Competence();
     
     int getDegat() const;

@@ -11,8 +11,16 @@ class Consommable{
     string nom;
     int dure, pv, force, resistance;
 
+        const enum nomConsommable{
+        POTION
+    };
+
+    const string filePath = "data/consommable/";
+    const vector<string> jsonConsommable = {"potion.json"};
+
     public:
     Consommable();
+    Consommable(nomConsommable c);
     Consommable(string n, int d, int p, int f, int r);
     ~Consommable();
 
@@ -24,6 +32,4 @@ class Consommable{
     int getPV();
     int getForce();
     int getResistance();
-
-    void genereConsommable(string FileName);
 };
