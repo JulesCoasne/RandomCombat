@@ -1,8 +1,7 @@
 #ifndef EQUIPEMENT_H
-#define _EQUIPEMENT_H
-#endif
-#include <iostream>
+#define EQUIPEMENT_H
 
+#include <iostream>
 
 using namespace std;
 
@@ -13,10 +12,12 @@ class Equipement{
         int resistence;
     
     public:
-        Equipement (const int &pvE , const int &forceE , const int &resistenceE);
-        ~Equipement();
+        Equipement(const int &pvE, const int &forceE, const int &resistenceE);  // Déclaration du constructeur
+        ~Equipement();  // Déclaration du destructeur
+        
         int getPV() const ;
         int getForce() const ;
         int getResistence() const ;
         static Equipement genereEquipement(int difficulty);
 };
+#endif

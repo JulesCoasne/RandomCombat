@@ -1,4 +1,5 @@
 #include "Competence.h"
+#include "Personnage.h"
 #include "../lib/json.hpp"
 #include <string>
 #include <iostream>
@@ -40,8 +41,8 @@ int Competence::getDegat() const {
 int Competence::getSoin() const {
     return soin;
 }
-
-void useCompetence(const Personnage &p, int force){
+void Competence::useCompetence(Personnage &p, int force){
     p.updatePV(-(degat * force));
     p.updatePV(soin);
 }
+

@@ -1,9 +1,9 @@
 #ifndef PERSONNAGE_H
-#define _PERSONNAGE_H
-#endif
+#define PERSONNAGE_H
+
 #include <iostream>
 #include <string>
-
+#include <vector>
 #include "Competence.h"
 #include "Inventaire.h"
 
@@ -33,4 +33,4 @@ public:
     bool isDead() const;
 };
 
-
+#endif // PERSONNAGE_H

@@ -1,15 +1,17 @@
 EXEC_NAME = RandomCombat
-OBJ_FILES = obj/Jeu.o obj/Consommable.o
+OBJ_FILES = obj/Jeu.o obj/Consommable.o obj/Niveau.o obj/Partie.o obj/Personnage.o obj/Competence.o obj/Ennemi.o obj/Equipement.o obj/Inventaire.o
 
 all: Jeu
 
 Jeu: $(OBJ_FILES)
-	g++ obj/Consommable.o obj/Jeu.o -o Jeu
+	g++ $(OBJ_FILES) -o Jeu
+	mkdir -p bin
 	mv Jeu bin/
 
 obj/%.o: src/%.cpp src/%.h 
+	mkdir -p obj
 	g++ -c  $< -o $@
 
 clean:
 	rm -rf obj/*.o
-	rm Jeu
+	rm -f bin/Jeu

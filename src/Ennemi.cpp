@@ -32,3 +32,30 @@ Ennemi::Ennemi(string nom, int diff) : nom(nom) {
     force = diff * 5;
     resistance = diff * 3;
 }
+
+string Ennemi::getNom() {
+    return nom;
+}
+
+int Ennemi::getPV() {
+    return pv;
+}
+
+int Ennemi::getForce() {
+    return force;
+}
+
+int Ennemi::getResistance() {
+    return resistance;
+}
+
+void Ennemi::updatePV(int update) {
+    pv += update;
+    if (pv < 0) {
+        pv = 0;
+    }
+}
+
+bool Ennemi::isDead() {
+    return pv <= 0;
+}

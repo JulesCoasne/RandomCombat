@@ -1,17 +1,21 @@
+#ifndef NIVEAU_H
+#define NIVEAU_H
+
 #include <iostream>
 #include <vector>
 #include <string>
 
 using namespace std;
 
-class Niveau{
-    private:
+class Niveau {
+private:
     int difficulte;
 
-    public:
+public:
     Niveau();
     Niveau(int diff);
-    ~Niveau();
+    ~Niveau() = default;
 
     bool nouveauCombat();
 };
+#endif  // NIVEAU_H

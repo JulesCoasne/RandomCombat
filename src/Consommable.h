@@ -1,6 +1,5 @@
 #ifndef CONSOMMABLE_H
 #define CONSOMMABLE_H
-#endif
 
 #include <string>
 #include <vector>
@@ -18,7 +17,7 @@ class Consommable{
 
     public:
 
-    const enum nomConsommable{
+    enum nomConsommable{
         POTION
     };
 
@@ -27,12 +26,10 @@ class Consommable{
     Consommable(string n, int d, int p, int f, int r);
     ~Consommable();
 
-    /**
-     * @brief charge un consommble précréer
-    */
     string getNom();
     int getDure();
     int getPV();
     int getForce();
     int getResistance();
 };
+#endif

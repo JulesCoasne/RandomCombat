@@ -1,9 +1,7 @@
 #ifndef COMPETENCE_H
-#define _COMPETENCE_H
-#endif
+#define COMPETENCE_H
 
-#include "Personnage.h"
-#include "Ennemi.h"
+class Personnage;  // Déclaration anticipée
 #include <string>
 #include <vector>
 
@@ -20,7 +18,7 @@ private:
 
 public:
 
-    const enum nomCompetence{
+    enum nomCompetence{
         COUP_DE_POING
     };
     
@@ -32,7 +30,6 @@ public:
     int getDegat() const;
     int getSoin() const;
 
-    void useCompetence(const Personnage &p);
-    void useCompetence(const Ennemi &e); 
+    void useCompetence(Personnage &p, int force);
 };
-
+#endif

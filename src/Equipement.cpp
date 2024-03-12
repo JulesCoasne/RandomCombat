@@ -6,6 +6,15 @@
 using namespace std;
 
 
+Equipement::Equipement(const int &pvE, const int &forceE, const int &resistenceE) {
+    // Initialisation des membres de la classe
+}
+
+Equipement::~Equipement() {
+    // Nettoyage des ressources si nécessaire
+}
+
+
 Equipement Equipement::genereEquipement(int difficulty) {
     int pv = rand() % (difficulty * 5) + 1; 
     int force = rand() % (difficulty * 3) + 1;

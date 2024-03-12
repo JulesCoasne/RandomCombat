@@ -1,6 +1,5 @@
 #ifndef ENNEMI_H
-#define _ENNEMI_H
-#endif
+#define ENNEMI_H
 
 #include <iostream>
 #include <string>
@@ -18,7 +17,7 @@ private:
     int resistance;
     vector<Competence> tabCompetence;
 
-    const enum nomEnnemi{
+    enum nomEnnemi{
         SQUELETTE
     };
 
@@ -36,9 +35,8 @@ public:
     int getForce();
     int getResistance();
     
-    void updatePV();
+    void updatePV(int update);
 
     bool isDead();
 };
-
-
+#endif

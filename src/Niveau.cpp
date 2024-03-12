@@ -5,15 +5,11 @@
 
 using namespace std;
 
-Niveau::Niveau(){
+Niveau::Niveau() : difficulte(1) {}
 
+Niveau::Niveau(int diff) : difficulte(diff) {}
+
+bool Niveau::nouveauCombat() {
+    // Ici, vous pouvez ajouter la logique pour déterminer si un nouveau combat doit commencer
+    return true;  // Retourne vrai pour l'instant
 }
-
-Niveau::Niveau(int diff){
-    difficulte = diff;
-}
-
-bool Niveau::nouveauCombat(){
-    
-}
-

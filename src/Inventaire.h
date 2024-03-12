@@ -1,12 +1,10 @@
 #ifndef INVENTAIRE_H
-#define _INVENTAIRE_H
-#endif
+#define INVENTAIRE_H
 
 #include "Consommable.h"
 #include "Equipement.h"
 #include <vector>
 #include <iostream>
-
 
 using namespace std;
 
@@ -17,17 +15,11 @@ class Inventaire
        vector<Equipement> tabEquipement ;
     
     public:
-        Inventaire ();
-        ~Inventaire();
+        Inventaire();  // Déclaration du constructeur par défaut
+        ~Inventaire();  // Déclaration du destructeur
         void useConsommable(int index);
         void addEquipement(const Equipement& equip);
         void addConsommable(const Consommable& conso);
         
 };
-
-
-
-
-
-
-
+#endif
