@@ -1,27 +1,20 @@
 #ifndef PERSONNAGE_H
 #define PERSONNAGE_H
 
-#include <iostream>
 #include <string>
-#include <vector>
 #include "Competence.h"
-#include "Inventaire.h"
-
-using namespace std;
 
 class Personnage {
 private:
-    string nom;
+    std::string nom;
     int pv;
     int force;
     int resistance;
-    vector<Competence> tabCompetence;
-    Inventaire inv;
 
 public:
-    Personnage(const string &nom);
+    Personnage(const std::string &nom);
 
-    string getNom() const;
+    std::string getNom() const;
     int getPV() const;
     int getForce() const;
     int getResistance() const;
@@ -31,6 +24,8 @@ public:
     void updateResistance(int update);
 
     bool isDead() const;
+    void useCompetence(const Competence &comp) ;
+
 };
 
 #endif // PERSONNAGE_H

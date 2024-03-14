@@ -1,21 +1,22 @@
 #ifndef NIVEAU_H
 #define NIVEAU_H
 
-#include <iostream>
-#include <vector>
-#include <string>
-
-using namespace std;
+#include "Ennemi.h"
+#include "Personnage.h"
 
 class Niveau {
 private:
+    int numNiveau;
     int difficulte;
+    Personnage joueur;
+    std::vector<Ennemi> tabEnnemi;
 
 public:
-    Niveau();
     Niveau(int diff);
-    ~Niveau() = default;
+    ~Niveau();
 
     bool nouveauCombat();
+    bool Combat();
 };
-#endif  // NIVEAU_H
+
+#endif // NIVEAU_H

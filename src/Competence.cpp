@@ -20,18 +20,14 @@ Competence::Competence(int stat, bool estSoin) {
     }
 }
 
-Competence::Competence(nomCompetence c){
-    string path = filePath +jsonCompetence[c];
+Competence::Competence(nomCompetence c) {
+    string path = filePath + jsonCompetence[c];
     ifstream file(path);
 
     json Doc = json::parse(file);
 
-    degat = {Doc["degat"]};
-    soin = {Doc["soin"]};
-}
-
-Competence::~Competence(){
-    
+    degat = Doc["degat"];
+    soin = Doc["soin"];
 }
 
 int Competence::getDegat() const {
@@ -41,8 +37,8 @@ int Competence::getDegat() const {
 int Competence::getSoin() const {
     return soin;
 }
-void Competence::useCompetence(Personnage &p, int force){
+
+void Competence::useCompetence(Personnage &p, int force) {
     p.updatePV(-(degat * force));
     p.updatePV(soin);
 }
-

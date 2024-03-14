@@ -9,12 +9,19 @@ Inventaire::~Inventaire() {
 }
 
 void Inventaire::useConsommable(int index) {
+    // Vérification si l'index est valide
+    if (index < 0 || index >= tabConsommable.size()) {
+        // Index de consommable invalide, sortie de la fonction
+        return;
+    }
+
+    // Obtention des attributs du consommable
     int consoDure =  tabConsommable[index].getDure();
     int consoPV = tabConsommable[index].getPV();
     int consoForce = tabConsommable[index].getForce();
     int consoResistance = tabConsommable[index].getResistance();
 
-    // Ici, vous pouvez ajouter la logique pour utiliser le consommable
+   
 }
 
 void Inventaire::addEquipement(const Equipement& equip) {
@@ -23,4 +30,4 @@ void Inventaire::addEquipement(const Equipement& equip) {
 
 void Inventaire::addConsommable(const Consommable& conso) {
     tabConsommable.push_back(conso);
-}  // Ajout de l'accolade fermante manquante
+}

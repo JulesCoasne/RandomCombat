@@ -1,15 +1,26 @@
 #include "Niveau.h"
-#include <iostream>
-#include <vector>
-#include <string>
 
-using namespace std;
+Niveau::Niveau(int nbNiveau, int diff) : numNiveau(nbNiveau), difficulte(diff), joueur("Joueur") {}
 
-Niveau::Niveau() : difficulte(1) {}
-
-Niveau::Niveau(int diff) : difficulte(diff) {}
+Niveau::~Niveau() {}
 
 bool Niveau::nouveauCombat() {
-    // Ici, vous pouvez ajouter la logique pour déterminer si un nouveau combat doit commencer
-    return true;  // Retourne vrai pour l'instant
+    bool joueurMort = joueur.isDead();
+    
+    bool tousVaincus = true;
+
+    // Vérifie si un ennemi est encore en vie
+    for (size_t i = 0; i < tabEnnemi.size(); ++i) {
+        if (!tabEnnemi[i].isDead()) {
+            // S'il y a un ennemi encore en vie, retourne vrai
+            return true;
+        }
+    }
+
+    return (tousVaincus || joueurMort);
+}
+
+bool Niveau::Combat() {
+    // Logique pour gérer le combat
+    return true; // Placeholder
 }

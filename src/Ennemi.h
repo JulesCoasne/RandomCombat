@@ -17,7 +17,7 @@ private:
     int resistance;
     vector<Competence> tabCompetence;
 
-    enum nomEnnemi{
+    enum nomEnnemi {
         SQUELETTE
     };
 
@@ -34,9 +34,9 @@ public:
     int getPV();
     int getForce();
     int getResistance();
-    
+
     void updatePV(int update);
 
-    bool isDead();
+     bool isDead() const;
 };
 #endif

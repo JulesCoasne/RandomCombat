@@ -8,7 +8,7 @@ using namespace std;
 using json = nlohmann::json;
 
 
-Ennemi::Ennemi(nomEnnemi e){
+Ennemi::Ennemi(nomEnnemi e) {
     string path = filePath + jsonEnnemi[e];
     ifstream file(path);
 
@@ -27,7 +27,6 @@ Ennemi::Ennemi(string nom) : nom(nom), pv(0), force(0), resistance(0) {}
 Ennemi::Ennemi(string nom, int p, int f, int r) : nom(nom), pv(p), force(f), resistance(r) {}
 
 Ennemi::Ennemi(string nom, int diff) : nom(nom) {
-   
     pv = diff * 10;
     force = diff * 5;
     resistance = diff * 3;
@@ -56,6 +55,6 @@ void Ennemi::updatePV(int update) {
     }
 }
 
-bool Ennemi::isDead() {
+bool Ennemi::isDead() const {
     return pv <= 0;
 }

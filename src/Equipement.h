@@ -6,18 +6,17 @@
 using namespace std;
 
 class Equipement{
-    private:
-        int pv;
-        int force ;
-        int resistence;
+private:
+    int pv;
+    int force ;
+    int resistence;
+
+public:
+    Equipement(const int &pvE, const int &forceE, const int &resistenceE);  
+    static Equipement genereEquipement(int difficulty);
     
-    public:
-        Equipement(const int &pvE, const int &forceE, const int &resistenceE);  // Déclaration du constructeur
-        ~Equipement();  // Déclaration du destructeur
-        
-        int getPV() const ;
-        int getForce() const ;
-        int getResistence() const ;
-        static Equipement genereEquipement(int difficulty);
+    int getPV() const ;
+    int getForce() const ;
+    int getResistence() const ;
 };
 #endif

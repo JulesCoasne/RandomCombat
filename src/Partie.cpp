@@ -1,23 +1,20 @@
 #include "Partie.h"
 
-Partie::Partie(int diff) : difficulte(diff) {}
+Partie::Partie(int diff) : difficulte(diff), niveau(nullptr), joueur("Joueur") {}
 
-Partie::~Partie() {}
-
-bool Partie::estTerminee() {
-    // Ici, vous pouvez ajouter la logique pour déterminer si la partie est terminée
-    return false;  // Retourne faux pour l'instant
+Partie::~Partie() {
+    delete niveau;
 }
 
-void Partie::afficherEtat() {
-    // Ici, vous pouvez ajouter la logique pour afficher l'état actuel du jeu
-}
-
-int Partie::demanderChoix() {
-    // Ici, vous pouvez ajouter la logique pour demander à l'utilisateur de faire un choix
-    return 0;  // Retourne 0 pour l'instant
-}
-
-void Partie::executerChoix(int choix) {
-    // Ici, vous pouvez ajouter la logique pour exécuter le choix de l'utilisateur
+bool Partie::nouveauNiveau(int diff) {
+    // Vérification pour libérer la mémoire si un niveau précédent existe
+    if (niveau != nullptr) {
+        delete niveau;
+    }
+    // Logique pour créer un nouveau niveau
+    // Vous pouvez initialiser un nouveau niveau avec la difficulté donnée
+    // et mettre à jour le niveau actuel de la partie
+    niveau = new Niveau(diff);
+    // Le niveau est créé avec succès, donc retourne vrai
+    return true;
 }

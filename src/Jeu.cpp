@@ -1,27 +1,33 @@
-#include "Partie.h"
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <string>
+#include "Jeu.h"
 
-using namespace std;
+Jeu::Jeu() : p(1) {}
 
-int main(int argc, char const *argv[])
-{
-    // Création d'une nouvelle partie
-    Partie partie(1);  // Difficulté 1 pour commencer
+Competence Jeu::getCompetence(int index) {
+    return tab_competence[index];
+}
 
-    // Boucle de jeu principale
-    while (!partie.estTerminee()) {
-        // Affiche l'état actuel du jeu
-        partie.afficherEtat();
+Consommable Jeu::getConsommable(int index) {
+    return tab_consommable[index];
+}
 
-        // Demande à l'utilisateur de faire un choix
-        int choix = partie.demanderChoix();
+Equipement Jeu::getEquipement(int index) {
+    return tab_equipement[index];
+}
 
-        // Exécute le choix de l'utilisateur
-        partie.executerChoix(choix);
-    }
+void Jeu::addEquipement(const Equipement& equip) {
+    tab_equipement.push_back(equip);
+}
 
-    return 0;
+void Jeu::addConsommable(const Consommable& cons) {
+    tab_consommable.push_back(cons);
+}
+
+int Jeu::nouvellePartie() {
+    // Logique pour initialiser une nouvelle partie
+    difficulte = 1; // Exemple de déclaration de la difficulté
+    return p.nouveauNiveau(difficulte);
+}
+
+void Jeu::useConsommable(int index) {
+    // Logique pour utiliser le consommable
 }

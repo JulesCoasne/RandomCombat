@@ -1,13 +1,8 @@
 #include "Personnage.h"
-#include <iostream>
 
-using namespace std;
+Personnage::Personnage(const std::string &nom) : nom(nom), pv(100), force(10), resistance(10) {}
 
-Personnage::Personnage(const string &nom) : nom(nom), pv(100), force(10), resistance(10) {
-    tabCompetence.push_back(Competence(Competence::COUP_DE_POING));
-}
-
-string Personnage::getNom() const {
+std::string Personnage::getNom() const {
     return nom;
 }
 
@@ -40,4 +35,18 @@ void Personnage::updateResistance(int update) {
 
 bool Personnage::isDead() const {
     return pv <= 0;
+}
+void Personnage::useCompetence(const Competence &comp) {
+    
+    // Si la compétence est offensive, réduire les points de vie de l'adversaire
+    // Si la compétence est de soin, augmenter les points de vie du personnage
+    if (comp.getDegat() > 0) {
+        // La compétence est offensive
+        updatePV(-comp.getDegat()); // Réduction des points de vie du personnage
+    } else if (comp.getSoin() > 0) {
+        // La compétence est de soin
+        updatePV(comp.getSoin()); // Augmentation des points de vie du personnage
+    }
+
+    
 }

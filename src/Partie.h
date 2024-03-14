@@ -1,23 +1,20 @@
 #ifndef PARTIE_H
 #define PARTIE_H
 
-#include <iostream>
-#include <vector>
-#include <string>
-
-using namespace std;
+#include "Niveau.h"
+#include "Personnage.h"
 
 class Partie {
 private:
     int difficulte;
+    Niveau* niveau;
+    Personnage joueur;
 
 public:
     Partie(int diff);
     ~Partie();
 
-    bool estTerminee();
-    void afficherEtat();
-    int demanderChoix();
-    void executerChoix(int choix);
+    bool nouveauNiveau(int diff);
 };
-#endif  // PARTIE_H
+
+#endif // PARTIE_H
