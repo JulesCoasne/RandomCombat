@@ -11,9 +11,7 @@ bool Partie::nouveauNiveau(int diff) {
     if (niveau != nullptr) {
         delete niveau;
     }
-    // Logique pour créer un nouveau niveau
-    // Vous pouvez initialiser un nouveau niveau avec la difficulté donnée
-    // et mettre à jour le niveau actuel de la partie
+    
     niveau = new Niveau(diff);
     // Le niveau est créé avec succès, donc retourne vrai
     return true;

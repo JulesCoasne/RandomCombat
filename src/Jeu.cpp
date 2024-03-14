@@ -3,31 +3,41 @@
 Jeu::Jeu() : p(1) {}
 
 Competence Jeu::getCompetence(int index) {
-    return tab_competence[index];
+    return tabCompetence[index];
 }
 
 Consommable Jeu::getConsommable(int index) {
-    return tab_consommable[index];
+    return tabConsommable[index];
 }
 
 Equipement Jeu::getEquipement(int index) {
-    return tab_equipement[index];
+    return tabEquipement[index];
 }
 
 void Jeu::addEquipement(const Equipement& equip) {
-    tab_equipement.push_back(equip);
+    tabEquipement.push_back(equip);
 }
 
 void Jeu::addConsommable(const Consommable& cons) {
-    tab_consommable.push_back(cons);
+    tabConsommable.push_back(cons);
 }
 
 int Jeu::nouvellePartie() {
-    // Logique pour initialiser une nouvelle partie
-    difficulte = 1; // Exemple de déclaration de la difficulté
     return p.nouveauNiveau(difficulte);
 }
 
-void Jeu::useConsommable(int index) {
-    // Logique pour utiliser le consommable
+void Jeu::useConsommable(size_t index) {
+    if (index >= tabConsommable.size()) {
+        // Gérer le cas où l'index est en dehors des limites du tableau
+        return;
+    }
+
+    // Utiliser le consommable à l'index spécifié
+    tabConsommable[index].getDure();
+    tabConsommable[index].getPV();
+    tabConsommable[index].getForce();
+    tabConsommable[index].getResistance();
+
+    // Supprimer le consommable utilisé
+    tabConsommable.erase(tabConsommable.begin() + index);
 }

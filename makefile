@@ -1,29 +1,17 @@
-CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Wextra
-SRC_DIR = src
-OBJ_DIR = obj
-BIN_DIR = bin
+EXEC_NAME = RandomCombat
+OBJ_FILES = obj/Jeu.o obj/Consommable.o obj/Niveau.o obj/Partie.o obj/Personnage.o obj/Competence.o obj/Ennemi.o obj/Equipement.o obj/Inventaire.o
 
-# Liste des fichiers source
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
+all: Jeu
 
-# Liste des fichiers objet correspondants
-OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRCS))
+Jeu: $(OBJ_FILES)
+	g++ $(OBJ_FILES) -o Jeu
+	
+	mv Jeu bin/
 
-# Nom de l'exécutable
-TARGET = $(BIN_DIR)/jeu
+obj/%.o: src/%.cpp src/%.h 
+	
+	g++ -c  $< -o $@
 
-# Commande de compilation des fichiers objet
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
-
-# Commande de création de l'exécutable
-$(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) $^ -o $@
-
-# Cible par défaut
-all: $(TARGET)
-
-# Nettoyage des fichiers objets et de l'exécutable
 clean:
-	rm -f $(OBJ_DIR)/*.o $(TARGET)
+	rm -rf obj/*.o
+	rm -f bin/Jeu

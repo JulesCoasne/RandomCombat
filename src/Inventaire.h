@@ -11,10 +11,9 @@ private:
     std::vector<Equipement> tabEquipement;
 
 public:
-    Inventaire(); // Constructeur par défaut
-    ~Inventaire(); // Destructeur
+    Inventaire();
 
-    void useConsommable(int index);
+    void useConsommable(size_t index);
     void addEquipement(const Equipement& equip);
     void addConsommable(const Consommable& conso);
 };

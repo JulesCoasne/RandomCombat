@@ -2,30 +2,21 @@
 #define CONSOMMABLE_H
 
 #include <string>
-#include <vector>
-
-using namespace std;
 
 class Consommable {
 private:
-    string nom;
+    std::string nom;
     int dure, pv, force, resistance;
 
-    const string filePath = "data/consommable/";
-    const vector<string> jsonConsommable = {"potion.json"};
-
 public:
-    enum nomConsommable {
-        POTION
-    };
-
     Consommable();
-    Consommable(nomConsommable c);
+    explicit Consommable(const std::string& nom, int dure, int pv, int force, int resistance);
 
-    string getNom();
-    int getDure();
-    int getPV();
-    int getForce();
-    int getResistance();
+    std::string getNom() const;
+    int getDure() const;
+    int getPV() const;
+    int getForce() const;
+    int getResistance() const;
 };
-#endif
+
+#endif // CONSOMMABLE_H

@@ -1,27 +1,21 @@
 #include "Inventaire.h"
 
-Inventaire::Inventaire() {
-    // Initialisation des membres de la classe
-}
+Inventaire::Inventaire() {}
 
-Inventaire::~Inventaire() {
-    // Nettoyage des ressources si nécessaire
-}
-
-void Inventaire::useConsommable(int index) {
-    // Vérification si l'index est valide
-    if (index < 0 || index >= tabConsommable.size()) {
-        // Index de consommable invalide, sortie de la fonction
+void Inventaire::useConsommable(size_t index) {
+    if (index >= tabConsommable.size()) {
+        // Gérer le cas où l'index est en dehors des limites du tableau
         return;
     }
 
-    // Obtention des attributs du consommable
-    int consoDure =  tabConsommable[index].getDure();
-    int consoPV = tabConsommable[index].getPV();
-    int consoForce = tabConsommable[index].getForce();
-    int consoResistance = tabConsommable[index].getResistance();
+    // Utiliser le consommable à l'index spécifié
+    tabConsommable[index].getDure();
+    tabConsommable[index].getPV();
+    tabConsommable[index].getForce();
+    tabConsommable[index].getResistance();
 
-   
+    // Supprimer le consommable utilisé
+    tabConsommable.erase(tabConsommable.begin() + index);
 }
 
 void Inventaire::addEquipement(const Equipement& equip) {

@@ -9,11 +9,11 @@
 
 class Jeu {
 private:
-    std::vector<Competence> tab_competence;
-    std::vector<Consommable> tab_consommable;
-    std::vector<Equipement> tab_equipement;
+    std::vector<Competence> tabCompetence;
+    std::vector<Consommable> tabConsommable;
+    std::vector<Equipement> tabEquipement;
     Partie p;
-    int difficulte;
+    int difficulte = 1; 
 
 public:
     Jeu();
@@ -23,7 +23,7 @@ public:
     void addEquipement(const Equipement& equip);
     void addConsommable(const Consommable& cons);
     int nouvellePartie();
-    void useConsommable(int index);
+    void useConsommable(size_t index);
 };
 
 #endif // JEU_H

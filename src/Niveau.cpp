@@ -1,12 +1,15 @@
 #include "Niveau.h"
 
-Niveau::Niveau(int nbNiveau, int diff) : numNiveau(nbNiveau), difficulte(diff), joueur("Joueur") {}
+Niveau::Niveau(int diff) : numNiveau(diff), joueur("Joueur") {
+    // Initialisation de votre niveau
+}
 
-Niveau::~Niveau() {}
+Niveau::~Niveau() {
+    // Nettoyage des ressources
+}
 
 bool Niveau::nouveauCombat() {
     bool joueurMort = joueur.isDead();
-    
     bool tousVaincus = true;
 
     // Vérifie si un ennemi est encore en vie
@@ -17,6 +20,7 @@ bool Niveau::nouveauCombat() {
         }
     }
 
+    // S'il n'y a plus d'ennemi en vie ou si le joueur est mort, retourne faux
     return (tousVaincus || joueurMort);
 }
 

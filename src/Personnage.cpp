@@ -36,17 +36,7 @@ void Personnage::updateResistance(int update) {
 bool Personnage::isDead() const {
     return pv <= 0;
 }
-void Personnage::useCompetence(const Competence &comp) {
-    
-    // Si la compétence est offensive, réduire les points de vie de l'adversaire
-    // Si la compétence est de soin, augmenter les points de vie du personnage
-    if (comp.getDegat() > 0) {
-        // La compétence est offensive
-        updatePV(-comp.getDegat()); // Réduction des points de vie du personnage
-    } else if (comp.getSoin() > 0) {
-        // La compétence est de soin
-        updatePV(comp.getSoin()); // Augmentation des points de vie du personnage
-    }
 
-    
+void Personnage::useCompetence(const Competence &comp) {
+    // Implémentation de l'utilisation de la compétence
 }

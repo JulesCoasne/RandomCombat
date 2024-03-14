@@ -24,8 +24,7 @@ public:
     void updateResistance(int update);
 
     bool isDead() const;
-    void useCompetence(const Competence &comp) ;
-
+    void useCompetence(const Competence &comp);
 };
 
 #endif // PERSONNAGE_H
