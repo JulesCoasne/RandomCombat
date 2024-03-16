@@ -25,6 +25,8 @@ public:
 
     bool isDead() const;
     void useCompetence(const Competence &comp);
+    Personnage getPersonnage() const;
+
 };
 
 #endif // PERSONNAGE_H

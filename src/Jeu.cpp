@@ -1,7 +1,14 @@
 #include "Jeu.h"
 
-Jeu::Jeu() : p(1) {}
+Jeu::Jeu() : personnage("NomDuPersonnage"), ennemi("NomDeLEnnemi", 100, 50, 30), p(1) {}
 
+const Personnage& Jeu::getPersonnage() const {
+    return personnage;
+}
+
+const Ennemi& Jeu::getEnnemi() const {
+    return ennemi;
+}
 Competence Jeu::getCompetence(int index) {
     return tabCompetence[index];
 }
@@ -41,3 +48,4 @@ void Jeu::useConsommable(size_t index) {
     // Supprimer le consommable utilisé
     tabConsommable.erase(tabConsommable.begin() + index);
 }
+

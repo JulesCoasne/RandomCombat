@@ -30,13 +30,13 @@ public:
     Ennemi(string nom, int p, int f, int r);
     Ennemi(string nom, int diff);
 
-    string getNom();
-    int getPV();
-    int getForce();
-    int getResistance();
+    string getNom() const; // Déclarez-les comme constantes ici
+    int getPV() const;      // Ajoutez const après la liste des paramètres
+    int getForce() const;
+    int getResistance() const;
 
     void updatePV(int update);
 
-     bool isDead() const;
+    bool isDead() const;
 };
 #endif

@@ -2,6 +2,7 @@
 #define CONSOMMABLE_H
 
 #include <string>
+#include <vector>
 
 class Consommable {
 private:
@@ -10,13 +11,17 @@ private:
 
 public:
     Consommable();
-    explicit Consommable(const std::string& nom, int dure, int pv, int force, int resistance);
+    ~Consommable();
 
-    std::string getNom() const;
-    int getDure() const;
-    int getPV() const;
-    int getForce() const;
-    int getResistance() const;
+    /**
+     * @brief charge un consommble précréer
+     */
+    void genereConsommable(std::vector<Consommable> *v);
+    std::string getNom();
+    int getDure();
+    int getPV();
+    int getForce();
+    int getResistance();
 };
 
 #endif // CONSOMMABLE_H

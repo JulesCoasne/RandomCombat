@@ -15,6 +15,7 @@ public:
     ~Partie();
 
     bool nouveauNiveau(int diff);
+    const Personnage& getPersonnage() const;
 };
 
 #endif // PARTIE_H

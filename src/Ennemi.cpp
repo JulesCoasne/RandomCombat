@@ -7,7 +7,6 @@
 using namespace std;
 using json = nlohmann::json;
 
-
 Ennemi::Ennemi(nomEnnemi e) {
     string path = filePath + jsonEnnemi[e];
     ifstream file(path);
@@ -32,19 +31,19 @@ Ennemi::Ennemi(string nom, int diff) : nom(nom) {
     resistance = diff * 3;
 }
 
-string Ennemi::getNom() {
+string Ennemi::getNom() const {
     return nom;
 }
 
-int Ennemi::getPV() {
+int Ennemi::getPV() const {
     return pv;
 }
 
-int Ennemi::getForce() {
+int Ennemi::getForce() const {
     return force;
 }
 
-int Ennemi::getResistance() {
+int Ennemi::getResistance() const {
     return resistance;
 }
 

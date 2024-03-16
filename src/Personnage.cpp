@@ -40,3 +40,7 @@ bool Personnage::isDead() const {
 void Personnage::useCompetence(const Competence &comp) {
     // Implémentation de l'utilisation de la compétence
 }
+Personnage Personnage::getPersonnage() const {
+    // Retourne une copie de l'objet Personnage
+    return *this;
+}
