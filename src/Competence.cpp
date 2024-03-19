@@ -22,12 +22,28 @@ Competence::Competence(int stat, bool estSoin) {
 
 Competence::Competence(nomCompetence c) {
     string path = filePath + jsonCompetence[c];
-    ifstream file(path);
+    cout << path << endl;
 
-    json Doc = json::parse(file);
+    fstream f;
+     // Ouvrir le fichier JSON
+    f.open(path, ios::in);
+    if (!f) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << jsonCompetence[c] << endl;
+    }
 
-    degat = Doc["degat"];
-    soin = Doc["soin"];
+    // Analyser le fichier JSON
+    json jsonData;
+    f >> jsonData;
+    f.close();
+
+    // Récupérer les données du JSON
+    nom = jsonData["nom"];
+    degat = jsonData["degat"];
+    soin = jsonData["soin"];
+}
+
+string Competence::getNom() const {
+    return nom;
 }
 
 int Competence::getDegat() const {

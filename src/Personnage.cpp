@@ -1,6 +1,10 @@
 #include "Personnage.h"
 
-Personnage::Personnage(const std::string &nom) : nom(nom), pv(100), force(10), resistance(10) {}
+Personnage::Personnage() : nom("") {}
+
+Personnage::Personnage(const std::string &nom) : nom(nom), pv(100), force(10), resistance(10) {
+    addCompetence(Competence::COUP_DE_POING);
+}
 
 std::string Personnage::getNom() const {
     return nom;
@@ -16,6 +20,10 @@ int Personnage::getForce() const {
 
 int Personnage::getResistance() const {
     return resistance;
+}
+
+void Personnage::updateNom(string update){
+    nom = update;
 }
 
 void Personnage::updatePV(int update) {
@@ -37,10 +45,14 @@ bool Personnage::isDead() const {
     return pv <= 0;
 }
 
-void Personnage::useCompetence(const Competence &comp) {
-    // Implémentation de l'utilisation de la compétence
+Competence Personnage::getCompetence(int index) const{
+    return tabCompetence[index];
 }
-Personnage Personnage::getPersonnage() const {
-    // Retourne une copie de l'objet Personnage
-    return *this;
+
+void Personnage::addCompetence(Competence::nomCompetence c){
+    tabCompetence.push_back(Competence(c));
+}
+
+void Personnage::useCompetence(int index) {
+    // Implémentation de l'utilisation de la compétence
 }

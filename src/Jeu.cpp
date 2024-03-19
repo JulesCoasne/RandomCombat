@@ -1,51 +1,16 @@
-#include "Jeu.h"
+#include "Partie.h"
 
-Jeu::Jeu() : personnage("NomDuPersonnage"), ennemi("NomDeLEnnemi", 100, 50, 30), p(1) {}
+int main(int argc, char const *argv[]){
+    Partie partie = Partie(1);
+    
+    partie.joueur.updateNom("Joueur");
 
-const Personnage& Jeu::getPersonnage() const {
-    return personnage;
-}
-
-const Ennemi& Jeu::getEnnemi() const {
-    return ennemi;
-}
-Competence Jeu::getCompetence(int index) {
-    return tabCompetence[index];
-}
-
-Consommable Jeu::getConsommable(int index) {
-    return tabConsommable[index];
-}
-
-Equipement Jeu::getEquipement(int index) {
-    return tabEquipement[index];
-}
-
-void Jeu::addEquipement(const Equipement& equip) {
-    tabEquipement.push_back(equip);
-}
-
-void Jeu::addConsommable(const Consommable& cons) {
-    tabConsommable.push_back(cons);
-}
-
-int Jeu::nouvellePartie() {
-    return p.nouveauNiveau(difficulte);
-}
-
-void Jeu::useConsommable(size_t index) {
-    if (index >= tabConsommable.size()) {
-        // Gérer le cas où l'index est en dehors des limites du tableau
-        return;
+    if(!partie.nouveauNiveau()){
+        cout << "Erreur lors du chargement du niveau" << endl;
     }
 
-    // Utiliser le consommable à l'index spécifié
-    tabConsommable[index].getDure();
-    tabConsommable[index].getPV();
-    tabConsommable[index].getForce();
-    tabConsommable[index].getResistance();
+    partie.niveau->nouveauCombat();
 
-    // Supprimer le consommable utilisé
-    tabConsommable.erase(tabConsommable.begin() + index);
+    return 0;
 }
 

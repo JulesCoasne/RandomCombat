@@ -1,4 +1,5 @@
 {
-    "stat": 1,
-    "estSoin": false
+    "nom": "coup de poing",
+    "degat": 5,
+    "soin": 0
 }

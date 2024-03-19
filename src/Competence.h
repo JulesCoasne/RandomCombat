@@ -9,9 +9,10 @@ using namespace std;
 
 class Competence {
 private:
-    const string filePath = "data/competence/";
+    const string filePath = "/home/jules/Universite/LIFAPCD/RandomCombat/data/competence/";
     const vector<string> jsonCompetence = {"coup_de_poing.json"};
 
+    string nom;
     int degat;
     int soin;
 
@@ -24,6 +25,7 @@ public:
     Competence(int stat, bool estSoin);
     Competence(nomCompetence c);
     
+    string getNom() const;
     int getDegat() const;
     int getSoin() const;
 

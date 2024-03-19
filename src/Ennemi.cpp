@@ -1,6 +1,8 @@
 #include "Ennemi.h"
 #include "../lib/json.hpp"
 #include <fstream>
+#include <fcntl.h>
+#include <iostream>
 #include <vector>
 #include <string>
 
@@ -8,15 +10,26 @@ using namespace std;
 using json = nlohmann::json;
 
 Ennemi::Ennemi(nomEnnemi e) {
-    string path = filePath + jsonEnnemi[e];
-    ifstream file(path);
+    string path = "/home/jules/Universite/LIFAPCD/RandomCombat/data/ennemi/squelette.json";
+    cout << path << endl;
 
-    json Doc = json::parse(file);
+    fstream f;
+     // Ouvrir le fichier JSON
+    f.open(path, ios::in);
+    if (!f) {
+        cerr << "Erreur : impossible d'ouvrir le fichier " << jsonEnnemi[e] << endl;
+    }
 
-    nom = Doc["nom"];
-    pv = Doc["pv"];
-    force = Doc["force"];
-    resistance = Doc["resistance"];
+    // Analyser le fichier JSON
+    json jsonData;
+    f >> jsonData;
+    f.close();
+
+    // Récupérer les données du JSON
+    nom = jsonData["nom"];
+    pv = jsonData["pv"];
+    force = jsonData["force"];
+    resistance = jsonData["resistance"];
 
     tabCompetence.push_back(Competence(Competence::COUP_DE_POING));
 }

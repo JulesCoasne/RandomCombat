@@ -17,14 +17,14 @@ private:
     int resistance;
     vector<Competence> tabCompetence;
 
-    enum nomEnnemi {
-        SQUELETTE
-    };
-
-    const string filePath = "data/ennemi/";
+    const string filePath = "../data/ennemi/";
     const vector<string> jsonEnnemi = {"squelette.json"};
 
 public:
+    enum nomEnnemi {
+            SQUELETTE
+    };
+
     Ennemi(nomEnnemi e);
     Ennemi(string nom);
     Ennemi(string nom, int p, int f, int r);

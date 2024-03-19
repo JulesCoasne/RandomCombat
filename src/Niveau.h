@@ -3,6 +3,7 @@
 
 #include "Ennemi.h"
 #include "Personnage.h"
+#include "Combat.h"
 #include <vector> // N'oubliez pas d'inclure la bibliothèque vector
 
 class Niveau {
@@ -16,7 +17,6 @@ public:
     ~Niveau();
 
     bool nouveauCombat();
-    bool Combat();
 };
 
 #endif // NIVEAU_H

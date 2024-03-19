@@ -7,15 +7,16 @@
 class Partie {
 private:
     int difficulte;
-    Niveau* niveau;
-    Personnage joueur;
 
 public:
+    Personnage joueur;
+    Niveau * niveau;
+
+    Partie();
     Partie(int diff);
     ~Partie();
 
-    bool nouveauNiveau(int diff);
-    const Personnage& getPersonnage() const;
+    bool nouveauNiveau();
 };
 
 #endif // PARTIE_H

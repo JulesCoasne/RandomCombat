@@ -13,28 +13,14 @@
 
 class Jeu {
 private:
-    Personnage personnage;
-    Ennemi ennemi;
     std::vector<Competence> tabCompetence;
     std::vector<Consommable> tabConsommable;
     std::vector<Equipement> tabEquipement;
-    Partie p;
-    int difficulte = 1; 
-
 
 public:
+    Personnage joueur;
+
     Jeu();
-
-    const Personnage& getPersonnage() const;
-    const Ennemi& getEnnemi() const;
-    Competence getCompetence(int index);
-    Consommable getConsommable(int index);
-    Equipement getEquipement(int index);
-    void addEquipement(const Equipement& equip);
-    void addConsommable(const Consommable& cons);
-    int nouvellePartie();
-    void useConsommable(size_t index);
-
 };
 
 #endif // JEU_H
