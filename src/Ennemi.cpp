@@ -10,7 +10,7 @@ using namespace std;
 using json = nlohmann::json;
 
 Ennemi::Ennemi(nomEnnemi e) {
-    string path = "/home/jules/Universite/LIFAPCD/RandomCombat/data/ennemi/squelette.json";
+    string path = "../randomcombat/data/ennemi/squelette.json";
     cout << path << endl;
 
     fstream f;

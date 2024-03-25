@@ -9,8 +9,6 @@
 #include "Equipement.h"
 #include <vector>
 
-
-
 class Jeu {
 private:
     std::vector<Competence> tabCompetence;
