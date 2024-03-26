@@ -6,13 +6,11 @@
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_mixer.h"
 #include <iostream>
-#include "Jeu.h"
 #include "SDLSprite.h"
 
 class SDLJeu
 {
 private:
-    Jeu jeu;
     SDL_Window *window;
     SDL_Renderer *renderer;
     TTF_Font *font;

@@ -9,7 +9,7 @@ Niveau::~Niveau() {
 }
 
 bool Niveau::nouveauCombat(){
-    Combat combat = Combat(tabEnnemi, joueur);
+    Combat combat = Combat(tabEnnemi, &joueur);
 
     return combat.tour();
 }

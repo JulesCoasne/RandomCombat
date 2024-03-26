@@ -1,6 +1,6 @@
 #include "SDLJeu.h"
 
-SDLJeu::SDLJeu() : jeu(), font(nullptr), sound(nullptr), withSound(true)
+SDLJeu::SDLJeu() : font(nullptr), sound(nullptr), withSound(true)
 {
     // Initialisation de la SDL (à adapter selon vos besoins)
     if (SDL_Init(SDL_INIT_VIDEO) < 0)
@@ -30,7 +30,7 @@ SDLJeu::SDLJeu() : jeu(), font(nullptr), sound(nullptr), withSound(true)
     }
 
     // Chargement de l'image du terrain
-    terrain.loadFromFile("data/terrain.jfif", renderer);
+    terrain.loadFromFile("data/bg/background.png", renderer);
 
     // Autres initialisations...
 }

@@ -9,6 +9,7 @@ public:
     
     Affichage();
     ~Affichage();
+    void renderDecor();
 };
 
 

@@ -25,18 +25,3 @@ Affichage::~Affichage(){
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
-
-int main(int argc, char const *argv[])
-{
-    Affichage fenetre;
-    SDL_Event e;
-    while(true){
-        if(SDL_PollEvent(&e)){
-            if(e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE) {
-                break;
-            }
-        }
-    }
-
-    return 0;
-}

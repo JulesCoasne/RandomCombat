@@ -1,6 +1,6 @@
 #include "SDLSprite.h"
 
-SDLSprite::SDLSprite() : m_surface(nullptr), m_texture(nullptr), m_hasChanged(false)
+SDLSprite::SDLSprite() : m_surface(nullptr), m_texture(nullptr)
 {
 }
 
@@ -10,7 +10,6 @@ SDLSprite::~SDLSprite()
     SDL_DestroyTexture(m_texture);
     m_surface = nullptr;
     m_texture = nullptr;
-    m_hasChanged = false;
 }
 
 void SDLSprite::loadFromFile(const char *filename, SDL_Renderer *renderer)
