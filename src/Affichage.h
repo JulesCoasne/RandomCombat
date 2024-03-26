@@ -26,6 +26,7 @@ public:
     bool renderSprite();
     bool animateSprite();
     bool afficher();
+    void afficherMenu();
 };
 
 
