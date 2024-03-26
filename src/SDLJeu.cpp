@@ -30,7 +30,7 @@ SDLJeu::SDLJeu() : jeu(), font(nullptr), sound(nullptr), withSound(true)
     }
 
     // Chargement de l'image du terrain
-    terrain.loadFromFile("../data/terrain.jfif", renderer);
+    terrain.loadFromFile("data/terrain.jfif", renderer);
 
     // Autres initialisations...
 }

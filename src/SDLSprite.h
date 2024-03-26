@@ -1,8 +1,8 @@
 #ifndef SDLSPRITE_H
 #define SDLSPRITE_H
 
-#include "/mnt/c/Users/chahed/Desktop/libgraphique/gkit2light/extern/mingw/include/SDL2/SDL.h"
-#include "/usr/include/SDL2/SDL_image.h"
+#include "SDL2/SDL.h"
+#include "SDL2/SDL_image.h"
 #include <iostream>
 
 class SDLSprite

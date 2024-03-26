@@ -14,10 +14,10 @@ obj/%.o: src/%.cpp src/%.h
 	g++ -c $< -o $@
 
 obj/mainSDL.o: src/mainSDL.cpp
-	g++ -c src/mainSDL.cpp -o obj/mainSDL.o -I/usr/include/SDL2/
+	g++ -c src/mainSDL.cpp -o obj/mainSDL.o -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 obj/SDLSprite.o: src/SDLSprite.cpp src/SDLSprite.h
-	g++ -c src/SDLSprite.cpp -o obj/SDLSprite.o -I/usr/include/SDL2/
+	g++ -c src/SDLSprite.cpp -o obj/SDLSprite.o -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 # Nettoyage des fichiers objets et de l'exécutable
 clean:
