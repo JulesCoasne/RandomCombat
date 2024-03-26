@@ -6,7 +6,19 @@ Jeu::Jeu() {
 
 int main(int argc, char const *argv[])
 {
-    SDLJeu jeu;
-    jeu.sdlBoucle(); // Cette fonction appelle sdlAff() à l'intérieur de sa boucle
+    Affichage affichage;
+    SDL_Event e;
+
+    affichage.renderSprite();
+
+    while(true){
+        affichage.afficher();
+        if(SDL_PollEvent(&e)){
+            if(e.key.keysym.sym == SDLK_ESCAPE){
+                break;
+            }
+        }
+    }
+
     return 0;
 }
