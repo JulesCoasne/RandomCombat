@@ -19,6 +19,10 @@ obj/mainSDL.o: src/mainSDL.cpp
 obj/SDLSprite.o: src/SDLSprite.cpp src/SDLSprite.h
 	g++ -c src/SDLSprite.cpp -o obj/SDLSprite.o -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
+affichage: src/Affichage.cpp src/Affichage.h
+	g++ src/Affichage.cpp -o Affichage -lSDL2
+	mv Affichage bin/
+
 # Nettoyage des fichiers objets et de l'exécutable
 clean:
 	rm -rf obj/*.o
