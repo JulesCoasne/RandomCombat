@@ -12,7 +12,7 @@ Affichage::Affichage(){
         cout << "Erreur initialisation de SDL : " <<   SDL_GetError() << endl;
     }
 
-    window = SDL_CreateWindow("Random Combat", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, SDL_WINDOW_FULLSCREEN);
+    window = SDL_CreateWindow("Random Combat", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, w, h, 0);
     if(window == NULL){
         cout << "Erreur initialisation de la fenêtre : " << SDL_GetError() << endl;
     }
@@ -79,7 +79,7 @@ bool Affichage::animateSprite(){
 bool Affichage::afficher(){
     SDL_RenderClear(renderer);
     renderDecor();
-    animateSprite();
+    renderSprite();
     SDL_RenderPresent(renderer);
     return true;
 }

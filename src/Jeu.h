@@ -7,7 +7,6 @@
 #include "Competence.h"
 #include "Consommable.h"
 #include "Equipement.h"
-#include "SDLJeu.h"
 #include "Affichage.h"
 #include <vector>
 
