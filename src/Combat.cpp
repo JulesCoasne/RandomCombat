@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Combat::Combat(vector<Ennemi> e, Personnage& j): tabEnnemi(e), joueur(j), nbTour(0){}
+Combat::Combat(vector<Ennemi> e, Personnage * j): tabEnnemi(e), joueur(j), nbTour(0){}
 
 Combat::~Combat(){}
 
@@ -24,24 +24,24 @@ bool Combat::tour(){
             }
 
             if(action == 1){
-                int attaque = affichage.attaque(joueur);
+                int attaque = affichage.attaque(*joueur);
                 if(attaque != 0){
                     int choixEnnemi = affichage.choixEnnemiCombat(tabEnnemi);
                     if(choixEnnemi != 0){
-                        int degat = joueur.getCompetence(action - 1).getDegat() - tabEnnemi[choixEnnemi - 1].getResistance();
-                        int soin = joueur.getCompetence(action - 1).getSoin();
+                        int degat = joueur->getCompetence(action - 1).getDegat() - tabEnnemi[choixEnnemi - 1].getResistance();
+                        int soin = joueur->getCompetence(action - 1).getSoin();
 
                         tabEnnemi[choixEnnemi - 1].updatePV(-degat);
-                        joueur.updatePV(soin);
+                        joueur->updatePV(soin);
 
                         affichage.resumeCombat(tabEnnemi[choixEnnemi - 1].getNom(), degat, soin);
 
-                        if(tabEnnemi[0].isDead()){
-                            int degatEnnemi = tabEnnemi[0].getForce() - joueur.getResistance();
-                            joueur.updatePV(degatEnnemi);
+                        if(!tabEnnemi[0].isDead()){
+                            int degatEnnemi = tabEnnemi[0].getForce() - joueur->getResistance();
+                            joueur->updatePV(degatEnnemi);
                             affichage.attaqueEnnemi(degatEnnemi, tabEnnemi[0]);
 
-                            affichage.pvRestant(joueur.getPV());
+                            affichage.pvRestant(joueur->getPV());
                         }
             
                         aJouer = true;
@@ -62,7 +62,7 @@ bool Combat::tour(){
             }
         }
 
-        if(joueur.isDead()){
+        if(joueur->isDead()){
             continuer = false;
         }
 

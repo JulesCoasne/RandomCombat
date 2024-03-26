@@ -11,10 +11,10 @@ class Combat{
     private:
         int nbTour;
         vector<Ennemi> tabEnnemi;
-        Personnage& joueur;
+        Personnage * joueur;
 
     public:
-        Combat(vector<Ennemi> e, Personnage& j);
+        Combat(vector<Ennemi> e, Personnage * j);
         ~Combat();
 
         bool tour();

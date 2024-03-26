@@ -9,7 +9,7 @@ using namespace std;
 
 class Competence {
 private:
-    const string filePath = "/home/jules/Universite/LIFAPCD/RandomCombat/data/competence/";
+    const string filePath = "data/competence/";
     const vector<string> jsonCompetence = {"coup_de_poing.json"};
 
     string nom;

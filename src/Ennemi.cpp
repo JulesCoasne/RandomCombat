@@ -10,9 +10,8 @@ using namespace std;
 using json = nlohmann::json;
 
 Ennemi::Ennemi(nomEnnemi e) {
-    string path = "/home/jules/Universite/LIFAPCD/RandomCombat/data/ennemi/squelette.json";
-    cout << path << endl;
-
+    string path = filePath + jsonEnnemi[e];
+    
     fstream f;
      // Ouvrir le fichier JSON
     f.open(path, ios::in);

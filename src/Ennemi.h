@@ -17,7 +17,7 @@ private:
     int resistance;
     vector<Competence> tabCompetence;
 
-    const string filePath = "../data/ennemi/";
+    const string filePath = "data/ennemi/";
     const vector<string> jsonEnnemi = {"squelette.json"};
 
 public:

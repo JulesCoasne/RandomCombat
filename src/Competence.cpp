@@ -22,7 +22,6 @@ Competence::Competence(int stat, bool estSoin) {
 
 Competence::Competence(nomCompetence c) {
     string path = filePath + jsonCompetence[c];
-    cout << path << endl;
 
     fstream f;
      // Ouvrir le fichier JSON
