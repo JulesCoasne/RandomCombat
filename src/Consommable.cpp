@@ -17,7 +17,7 @@ Consommable::~Consommable() {
 
 void Consommable::genereConsommable(vector<Consommable> *v) {
     vector<string> FileName = {"potion.json"};
-    string FilePath = "../data/consommable";
+    string FilePath = "data/consommable";
 
     for(int i = 0; i < FileName.size(); i++) {
         fstream f;

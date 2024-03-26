@@ -13,10 +13,6 @@ obj/%.o: src/%.cpp src/%.h
 obj/Jeu.o: src/Jeu.cpp
 	g++ -c src/Jeu.cpp -o obj/Jeu.o
 
-affichage: src/Affichage.cpp src/Affichage.h
-	g++ src/Affichage.cpp -o Affichage -lSDL2
-	mv Affichage bin/
-
 clean:
 	rm -rf obj/*.o
 	rm -f bin/$(EXEC_NAME)
