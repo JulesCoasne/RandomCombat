@@ -74,12 +74,12 @@ bool Affichage::animateSprite(){
     s->descRect.x += 2;
 
     SDL_RenderCopy(renderer, s->texture, NULL, &s->descRect);
+    return true;
 }
 
-bool Affichage::afficher(){
+void Affichage::afficher(){
     SDL_RenderClear(renderer);
     renderDecor();
     renderSprite();
     SDL_RenderPresent(renderer);
-    return true;
 }
