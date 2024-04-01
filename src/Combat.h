@@ -17,6 +17,11 @@ class Combat{
         Combat(vector<Ennemi> e, Personnage * j);
         ~Combat();
 
+        int deroulerCombat();
+        bool attaque();
+        int consommable();
+        int consultEnnemi();
+        int abandonner();
         bool tour();
 };
 #endif

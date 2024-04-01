@@ -35,6 +35,7 @@ public:
     int getForce() const;
     int getResistance() const;
 
+    void prendDegat(int degat);
     void updatePV(int update);
 
     bool isDead() const;

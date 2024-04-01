@@ -11,11 +11,8 @@ int main(int argc, char const *argv[])
 
     while(true){
         affichage.afficher();
-        if(SDL_PollEvent(&e)){
-            if(e.key.keysym.sym == SDLK_ESCAPE){
-                break;
-            }
-        }
+        SDL_PollEvent(&e);
+        if(e.key.keysym.sym == SDLK_ESCAPE || e.type == SDL_QUIT) break;
     }
 
     return 0;

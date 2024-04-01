@@ -59,6 +59,11 @@ int Ennemi::getResistance() const {
     return resistance;
 }
 
+void Ennemi::prendDegat(int degat){
+    pv -= (int)((float)degat * (resistance/100));
+    if(pv < 0) pv = 0;
+}
+
 void Ennemi::updatePV(int update) {
     pv += update;
     if (pv < 0) {

@@ -6,72 +6,45 @@ Combat::Combat(vector<Ennemi> e, Personnage * j): tabEnnemi(e), joueur(j), nbTou
 
 Combat::~Combat(){}
 
-bool Combat::tour(){
-    affichageText affichage;
-    bool continuer = true;
+int Combat::deroulerCombat(){
+    int ennemiRestant = tabEnnemi.size();
+    if(tour()){
+        
+    }
+}
+
+bool Combat::attaque(){
+    vector<Competence> c = joueur->getTabCompetence();
     bool aJouer = false;
-    int action = 0;
+    int choixCompetence, choixEnnemi;
+    
+    while(!aJouer){
+        if(choixCompetence == 0) return 0;
+        int degat = c[choixCompetence].getDegat() * joueur->getForce();
 
-    while(continuer){
-        nbTour++;
-        action = 0;
-        aJouer = false;
-
-        while(!aJouer){
-            if(action == 0){
-                affichage.infoCombat(tabEnnemi);
-                action = affichage.debutTour(tabEnnemi.size());
-            }
-
-            if(action == 1){
-                int attaque = affichage.attaque(*joueur);
-                if(attaque != 0){
-                    int choixEnnemi = affichage.choixEnnemiCombat(tabEnnemi);
-                    if(choixEnnemi != 0){
-                        int degat = joueur->getCompetence(action - 1).getDegat() - tabEnnemi[choixEnnemi - 1].getResistance();
-                        int soin = joueur->getCompetence(action - 1).getSoin();
-
-                        tabEnnemi[choixEnnemi - 1].updatePV(-degat);
-                        joueur->updatePV(soin);
-
-                        affichage.resumeCombat(tabEnnemi[choixEnnemi - 1].getNom(), degat, soin);
-
-                        if(!tabEnnemi[0].isDead()){
-                            int degatEnnemi = tabEnnemi[0].getForce() - joueur->getResistance();
-                            joueur->updatePV(degatEnnemi);
-                            affichage.attaqueEnnemi(degatEnnemi, tabEnnemi[0]);
-
-                            affichage.pvRestant(joueur->getPV());
-                        }
-            
-                        aJouer = true;
-                    }
-                }else{
-                    action = 0;
-                }
-            }
-
-            if(action == 3){
-                action = affichage.quitter();
-                if(action == 0){
-                    aJouer = true;
-                    continuer = false;
-                }else{
-                    action = 0;
-                }
-            }
-        }
-
-        if(joueur->isDead()){
-            continuer = false;
-        }
-
-        if(tabEnnemi[0].isDead()){
-            continuer = false;
+        if(choixEnnemi != 0){
+            tabEnnemi[choixEnnemi].prendDegat(degat);
+            aJouer = true;
         }
     }
+}
 
-    affichage.finDuCombat();
+//event: 1 = Attaque - 2 = Consommable - 3 = Consulter les ennemies - 4 = Abandonner
+bool Combat::tour(){
+    bool aJouer = false;
+    int event;
 
+    nbTour++;
+
+    while(!aJouer){
+        if(event == 1) aJouer = attaque();
+        if(event == 2) aJouer = consommable();
+        if(event == 3) consultEnnemi();
+        if(event == 4){
+            if(abandonner()){
+                return false;
+            }
+        }
+    
     return true;
 } 
