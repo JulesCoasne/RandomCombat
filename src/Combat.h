@@ -4,6 +4,7 @@
 #include "Ennemi.h"
 #include "Personnage.h"
 #include "affichageText.h"
+#include "Consommable.h"
 
 #include <vector>
 
@@ -12,7 +13,9 @@ class Combat{
         int nbTour;
         vector<Ennemi> tabEnnemi;
         Personnage * joueur;
-
+        bool isUsingConsommable;
+        Consommable usedConsommable;
+        
     public:
         Combat(vector<Ennemi> e, Personnage * j);
         ~Combat();

@@ -29,6 +29,19 @@ bool Combat::attaque(){
     }
 }
 
+int Combat::consommable(){
+    bool aJouer = false;
+    int choixConsommable;
+
+    while(!aJouer){
+        if(choixConsommable == 0) return 0;
+        else{
+            usedConsommable:joueur->useConsommable(choixConsommable);
+            aJouer = true;
+        }
+    }
+}
+
 //event: 1 = Attaque - 2 = Consommable - 3 = Consulter les ennemies - 4 = Abandonner
 bool Combat::tour(){
     bool aJouer = false;
@@ -38,7 +51,7 @@ bool Combat::tour(){
 
     while(!aJouer){
         if(event == 1) aJouer = attaque();
-        //if(event == 2) aJouer = consommable();
+        if(event == 2) aJouer = consommable();
         //if(event == 3) consultEnnemi();
         //if(event == 4){
         //    if(abandonner()){

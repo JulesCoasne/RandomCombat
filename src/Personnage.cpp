@@ -57,6 +57,12 @@ void Personnage::addCompetence(Competence::nomCompetence c){
     tabCompetence.push_back(Competence(c));
 }
 
-void Personnage::useCompetence(int index) {
-    // Implémentation de l'utilisation de la compétence
+void Personnage::useConsommable(int index) {
+    
+    while (Consommable:getDure() != 0){
+        return Personnage:getForce()+ Consommable:getForce();
+
+
+    }
+    
 }

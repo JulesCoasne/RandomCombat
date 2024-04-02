@@ -3,8 +3,8 @@
 
 #include <string>
 #include <vector>
+#include "Consommable.h"
 #include "Competence.h"
-
 class Personnage {
 private:
     std::string nom;
@@ -31,7 +31,7 @@ public:
     bool isDead() const;
     Competence getCompetence(int index) const;
     void addCompetence(Competence::nomCompetence c);
-    void useCompetence(int index);
+    void useConsommable(int index);
 
 };
 
