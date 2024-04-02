@@ -49,6 +49,10 @@ Competence Personnage::getCompetence(int index) const{
     return tabCompetence[index];
 }
 
+vector<Competence> Personnage::getTabCompetence() const{
+    return tabCompetence;
+}
+
 void Personnage::addCompetence(Competence::nomCompetence c){
     tabCompetence.push_back(Competence(c));
 }

@@ -38,13 +38,13 @@ bool Combat::tour(){
 
     while(!aJouer){
         if(event == 1) aJouer = attaque();
-        if(event == 2) aJouer = consommable();
-        if(event == 3) consultEnnemi();
-        if(event == 4){
-            if(abandonner()){
-                return false;
-            }
-        }
-    
+        //if(event == 2) aJouer = consommable();
+        //if(event == 3) consultEnnemi();
+        //if(event == 4){
+        //    if(abandonner()){
+        //        return false;
+        //    }
+        //}
+    }
     return true;
 } 
