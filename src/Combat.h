@@ -3,7 +3,6 @@
 
 #include "Ennemi.h"
 #include "Personnage.h"
-#include "affichageText.h"
 #include "Consommable.h"
 
 #include <vector>

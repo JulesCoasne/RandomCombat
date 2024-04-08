@@ -56,13 +56,3 @@ vector<Competence> Personnage::getTabCompetence() const{
 void Personnage::addCompetence(Competence::nomCompetence c){
     tabCompetence.push_back(Competence(c));
 }
-
-void Personnage::useConsommable(int index) {
-    
-    while (Consommable:getDure() != 0){
-        return Personnage:getForce()+ Consommable:getForce();
-
-
-    }
-    
-}

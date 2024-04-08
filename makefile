@@ -1,5 +1,5 @@
 EXEC_NAME = RandomCombat
-OBJ_FILES = obj/Jeu.o obj/Consommable.o obj/Combat.o obj/Niveau.o obj/Partie.o obj/Personnage.o obj/Competence.o obj/Ennemi.o obj/Equipement.o obj/Inventaire.o obj/affichageText.o obj/Affichage.o
+OBJ_FILES = obj/Jeu.o obj/Consommable.o obj/Combat.o obj/Niveau.o obj/Partie.o obj/Personnage.o obj/Competence.o obj/Ennemi.o obj/Equipement.o obj/Inventaire.o obj/Affichage.o obj/Texte.o
 
 # Commande par défaut
 all: $(EXEC_NAME)

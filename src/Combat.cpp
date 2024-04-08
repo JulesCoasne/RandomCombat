@@ -36,7 +36,7 @@ int Combat::consommable(){
     while(!aJouer){
         if(choixConsommable == 0) return 0;
         else{
-            usedConsommable:joueur->useConsommable(choixConsommable);
+            //usedConsommable:joueur->useConsommable(choixConsommable);
             aJouer = true;
         }
     }
