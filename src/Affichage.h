@@ -12,7 +12,7 @@ struct Sprite{
 };
 
 struct Button{
-    std::string nom;
+    char * texte;
     SDL_Texture* texture;
     SDL_Rect descRect;
 };
@@ -48,13 +48,13 @@ public:
     void createSprites();
     void renderSprites();
 
-    void createButton();
+    void createButton(int x, int y, char * txt);
     void renderButtons();
 
     void createDialogue();
     void renderDialogue();
 
-    void afficherTexte16(const char * txt);
+    void afficherTexteButton(const char * txt, int x, int y);
     void afficherTexteDialogue(const char * txt);
     void afficherTexteTitre(const char * txt);
 

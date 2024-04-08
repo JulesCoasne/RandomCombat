@@ -20,13 +20,13 @@ int main(int argc, char const *argv[])
 
     while(true){
         affichage.gameStartBG();
+        affichage.createButton(540, 335, "Quit");
+
         SDL_PollEvent(&e);
         if(e.key.keysym.sym == SDLK_ESCAPE || e.type == SDL_QUIT) break;
 
         if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
-            if(affichage.buttonIsClicked(&e) == 1){
-
-            }
+            if(affichage.buttonIsClicked(&e) == 0) break;
         }
         affichage.render();
     }

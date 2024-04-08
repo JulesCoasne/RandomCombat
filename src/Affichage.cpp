@@ -53,7 +53,6 @@ bool Affichage::initAssets(){
     createBackground();
     createDialogue();
     createSprites();
-    createButton();
 
     return true;
 }
@@ -109,26 +108,39 @@ void Affichage::renderSprites(){
     }
 }
 
-void Affichage::createButton(){
+void Affichage::createButton(int x, int y, char * txt){
     Button b;
-    SDL_Surface * ButtonSurface = IMG_Load("data/HUD/button_attaque.png");
 
+    b.texte = txt;
+
+    SDL_Surface * ButtonSurface = SDL_CreateRGBSurface(0, 200, 50, 32, 0, 0, 255, 255);
+    SDL_SetSurfaceBlendMode(ButtonSurface, SDL_BLENDMODE_BLEND);
     b.texture = SDL_CreateTextureFromSurface(renderer, ButtonSurface);
     SDL_FreeSurface(ButtonSurface);
 
     b.descRect.w = ButtonSurface->w;
     b.descRect.h = ButtonSurface->h;
-    b.descRect.x = w / 4;
-    b.descRect.y = h / 10;
-
-    b.nom = "attaque";
+    b.descRect.x = x;
+    b.descRect.y = y;
 
     vectButton.push_back(b);
 }
 
 void Affichage::renderButtons(){
-    for(int i = 0; i < vectButton.size(); i++){
+    for(size_t i = 0; i < vectButton.size(); i++){
+        SDL_Surface * surface = TTF_RenderText_Solid(font16, vectButton[i].texte, SDL_Color {255, 255, 255});
+        SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, surface);
+
+        SDL_Rect txtRect;
+        txtRect.w = surface->w;
+        txtRect.h = surface->h;
+        txtRect.x = vectButton[i].descRect.x + ((vectButton[i].descRect.x - txtRect.w) / 2);
+        txtRect.y = vectButton[i].descRect.y + ((vectButton[i].descRect.y - txtRect.h) / 2);
+
         SDL_RenderCopy(renderer, vectButton[i].texture, NULL, &vectButton[i].descRect);
+        SDL_RenderCopy(renderer, texture, NULL, &txtRect);
+
+        SDL_FreeSurface(surface);
     }
 }
 
@@ -184,10 +196,7 @@ int Affichage::buttonIsClicked(SDL_Event * e){
         SDL_Rect r = vectButton[i].descRect;
 
         if((x > r.x && x < r.x + r.w) && (y > r.y && y < r.y + r.h)){
-            if(vectButton[i].nom == "attaque") return 1;
-            if(vectButton[i].nom == "consommable") return 2;
-            if(vectButton[i].nom == "ennemi") return 3;
-            if(vectButton[i].nom == "abandonner") return 4;
+            return i;
         }
     }
 
@@ -200,6 +209,7 @@ bool Affichage::animateSprite(){
 }
 
 void Affichage::render(){    
+    renderButtons();
     SDL_RenderPresent(renderer);
     SDL_RenderClear(renderer);
 }
