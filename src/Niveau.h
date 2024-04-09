@@ -13,7 +13,7 @@ private:
     std::vector<Ennemi> tabEnnemi; // Vector pour stocker les ennemis
 
 public:
-    Niveau(int diff);
+    Niveau();
     ~Niveau();
 
     bool nouveauCombat();

@@ -6,30 +6,40 @@ Jeu::Jeu() {
 
 int main(int argc, char const *argv[])
 {
-    Affichage affichage;
+    bool start = false;
+    bool nvPartie = false;
+    int classe = 0;
+    Partie * p;
+    Affichage * affichage;
     SDL_Event e;
 
-    while(true){
+    affichage->createButton(540, 335, "Nouvelle Partie");
+
+    while(!nvPartie){
         SDL_PollEvent(&e);
+        affichage->gameStartBG();
 
-        if(e.key.keysym.sym == SDLK_RETURN) break;
-        affichage.gameStartBG();
-        affichage.afficherTexteTitre("RandomCombat");
-        affichage.render();
-    }
-
-    while(true){
-        affichage.gameStartBG();
-        affichage.createButton(540, 335, "Quit");
-
-        SDL_PollEvent(&e);
-        if(e.key.keysym.sym == SDLK_ESCAPE || e.type == SDL_QUIT) break;
-
-        if(e.type == SDL_MOUSEBUTTONDOWN && e.button.button == SDL_BUTTON_LEFT){
-            if(affichage.buttonIsClicked(&e) == 0) break;
+        if(start == false){
+            affichage->afficherTexteTitre("RandomCombat");
+            if(e.key.keysym.sym == SDLK_RETURN) start = true;
+        }else{
+            affichage->renderButtons();
+            if(e.type == SDL_MOUSEBUTTONUP && e.button.button == SDL_BUTTON_LEFT){
+                if(affichage->buttonIsClicked(&e) == 0){
+                    p->nouvellePartie(affichage);
+                    return 0;
+                }
+            }
         }
-        affichage.render();
+
+        if(e.key.keysym.sym == SDLK_ESCAPE || e.type == SDL_QUIT) return 0;
+
+        
+        affichage->render();
     }
+
+
+    
 
     return 0;
 }

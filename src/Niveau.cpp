@@ -1,6 +1,6 @@
 #include "Niveau.h"
 
-Niveau::Niveau(int diff) : numNiveau(diff), joueur("Joueur") {
+Niveau::Niveau(){
     tabEnnemi.push_back(Ennemi(Ennemi::SQUELETTE));
 }
 

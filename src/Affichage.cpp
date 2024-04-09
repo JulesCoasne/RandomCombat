@@ -24,8 +24,23 @@ Affichage::Affichage(){
     }
 
     font16 = TTF_OpenFont("data/font/runescape_uf.ttf", 16);
+
+    if(font16 == NULL){
+        cout << "Erreur de l'initialisation de font16" << TTF_GetError() << endl;
+    }
+
     font24 = TTF_OpenFont("data/font/runescape_uf.ttf", 24);
+
+    if(font24 == NULL){
+        cout << "Erreur de l'initialisation de font24" << TTF_GetError() << endl;
+    }
+
     font64 = TTF_OpenFont("data/font/runescape_uf.ttf", 64);
+
+    if(font64 == NULL){
+        cout << "Erreur de l'initialisation de font64" << TTF_GetError() << endl;
+    }
+
 
     if(font16 == NULL){
         cout << TTF_GetError();
@@ -43,8 +58,21 @@ Affichage::Affichage(){
 }
 
 Affichage::~Affichage(){
+    for(size_t i = 0; i < vectButton.size(); i++){
+       SDL_DestroyTexture(vectButton[i].texture);
+    }
+
+    for(size_t i = 0; i < vectSprite.size(); i++){
+        SDL_DestroyTexture(vectSprite[i].texture);
+    }
+
+    SDL_DestroyTexture(backgroundTexture);
+    SDL_DestroyTexture(dialogueTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
+    TTF_CloseFont(font16);
+    TTF_CloseFont(font24);
+    TTF_CloseFont(font64);
     TTF_Quit();
     SDL_Quit();
 }
@@ -59,11 +87,19 @@ bool Affichage::initAssets(){
 
 void Affichage::gameStartBG(){
     SDL_Surface * s = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
+    if(s == NULL){
+        cout << "Erreur lors de l'initialisation de la surface startBG" << SDL_GetError() << endl;
+    }
     SDL_SetSurfaceBlendMode(s, SDL_BLENDMODE_BLEND);
+
     SDL_Texture * t = SDL_CreateTextureFromSurface(renderer, s);
-    SDL_FreeSurface(s);
+    if(t == NULL){
+        cout << "Erreur lors de l'initialisation de la texture startBG" << SDL_GetError() << endl;
+    }
+    
 
     SDL_RenderCopy(renderer, t, NULL, NULL);
+    SDL_FreeSurface(s);
 }
 
 void Affichage::createBackground(){
@@ -112,18 +148,26 @@ void Affichage::createButton(int x, int y, char * txt){
     Button b;
 
     b.texte = txt;
-
-    SDL_Surface * ButtonSurface = SDL_CreateRGBSurface(0, 200, 50, 32, 0, 0, 255, 255);
-    SDL_SetSurfaceBlendMode(ButtonSurface, SDL_BLENDMODE_BLEND);
-    b.texture = SDL_CreateTextureFromSurface(renderer, ButtonSurface);
-    SDL_FreeSurface(ButtonSurface);
-
-    b.descRect.w = ButtonSurface->w;
-    b.descRect.h = ButtonSurface->h;
     b.descRect.x = x;
     b.descRect.y = y;
+    b.descRect.w = 200;
+    b.descRect.h = 50;
+
+    SDL_Surface * surface = SDL_CreateRGBSurface(0, 200, 50, 32, 0, 0, 0, 0);
+    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 42, 96, 245));
+
+    b.texture = SDL_CreateTextureFromSurface(renderer, surface);
+    SDL_FreeSurface(surface);
 
     vectButton.push_back(b);
+    cout << vectButton.size() << endl;
+}
+
+void Affichage::deleteButton(){
+    for(size_t i = 0; i < vectButton.size(); i++){
+       SDL_DestroyTexture(vectButton[i].texture);
+    }
+    vectButton.clear();
 }
 
 void Affichage::renderButtons(){
@@ -134,8 +178,8 @@ void Affichage::renderButtons(){
         SDL_Rect txtRect;
         txtRect.w = surface->w;
         txtRect.h = surface->h;
-        txtRect.x = vectButton[i].descRect.x + ((vectButton[i].descRect.x - txtRect.w) / 2);
-        txtRect.y = vectButton[i].descRect.y + ((vectButton[i].descRect.y - txtRect.h) / 2);
+        txtRect.x = vectButton[i].descRect.x + (vectButton[i].descRect.w - txtRect.w) / 2;
+        txtRect.y = vectButton[i].descRect.y + (vectButton[i].descRect.h - txtRect.h) / 2;
 
         SDL_RenderCopy(renderer, vectButton[i].texture, NULL, &vectButton[i].descRect);
         SDL_RenderCopy(renderer, texture, NULL, &txtRect);
@@ -209,7 +253,6 @@ bool Affichage::animateSprite(){
 }
 
 void Affichage::render(){    
-    renderButtons();
     SDL_RenderPresent(renderer);
     SDL_RenderClear(renderer);
 }

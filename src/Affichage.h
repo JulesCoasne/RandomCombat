@@ -49,6 +49,7 @@ public:
     void renderSprites();
 
     void createButton(int x, int y, char * txt);
+    void deleteButton();
     void renderButtons();
 
     void createDialogue();

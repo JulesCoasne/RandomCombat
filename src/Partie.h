@@ -3,6 +3,7 @@
 
 #include "Niveau.h"
 #include "Personnage.h"
+#include "Affichage.h"
 
 class Partie {
 private:
@@ -13,10 +14,10 @@ public:
     Niveau * niveau;
 
     Partie();
-    Partie(int diff);
     ~Partie();
 
-    bool nouveauNiveau();
+    void nouvellePartie(Affichage * affichage);
+    int choixClasse();
 };
 
 #endif // PARTIE_H
