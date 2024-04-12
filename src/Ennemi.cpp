@@ -9,14 +9,17 @@
 using namespace std;
 using json = nlohmann::json;
 
+const string filePath = "data/ennemi/";
+const vector<string> pathEnnemi = {"squelette", "bat", "pirate"};
+
 Ennemi::Ennemi(nomEnnemi e) {
-    string path = filePath + jsonEnnemi[e];
+    string path = filePath + pathEnnemi[e] + ".json";
     
     fstream f;
      // Ouvrir le fichier JSON
     f.open(path, ios::in);
     if (!f) {
-        cerr << "Erreur : impossible d'ouvrir le fichier " << jsonEnnemi[e] << endl;
+        cerr << "Erreur : impossible d'ouvrir le fichier " << pathEnnemi[e] << endl;
     }
 
     // Analyser le fichier JSON
@@ -25,6 +28,7 @@ Ennemi::Ennemi(nomEnnemi e) {
     f.close();
 
     // Récupérer les données du JSON
+    sprite = "data/sprite/" + pathEnnemi[e] + ".png";
     nom = jsonData["nom"];
     pv = jsonData["pv"];
     force = jsonData["force"];
@@ -33,14 +37,16 @@ Ennemi::Ennemi(nomEnnemi e) {
     tabCompetence.push_back(Competence(Competence::COUP_DE_POING));
 }
 
-Ennemi::Ennemi(string nom) : nom(nom), pv(0), force(0), resistance(0) {}
-
 Ennemi::Ennemi(string nom, int p, int f, int r) : nom(nom), pv(p), force(f), resistance(r) {}
 
 Ennemi::Ennemi(string nom, int diff) : nom(nom) {
     pv = diff * 10;
     force = diff * 5;
     resistance = diff * 3;
+}
+
+string Ennemi::getSprite() {
+    return sprite;
 }
 
 string Ennemi::getNom() const {
@@ -59,16 +65,21 @@ int Ennemi::getResistance() const {
     return resistance;
 }
 
-void Ennemi::prendDegat(int degat){
-    pv -= (int)((float)degat * (resistance/100));
+int Ennemi::prendDegat(int degat){
+    degat = degat - resistance;
+
+    if(degat < 0) degat = 0;
+
+    pv -= degat;
+
     if(pv < 0) pv = 0;
+    
+    return degat;
 }
 
 void Ennemi::updatePV(int update) {
     pv += update;
-    if (pv < 0) {
-        pv = 0;
-    }
+    if (pv < 0) pv = 0;
 }
 
 bool Ennemi::isDead() const {

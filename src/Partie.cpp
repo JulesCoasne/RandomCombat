@@ -6,7 +6,7 @@ Partie::~Partie() {
     delete niveau;
 }
 
-void Partie::nouvellePartie(Affichage * affichage){
+void Partie::nouvellePartie(){
 
 }
 

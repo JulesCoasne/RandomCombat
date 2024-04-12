@@ -54,6 +54,11 @@ Affichage::Affichage(){
         cout << TTF_GetError();
     }
 
+    state.backgoundEnable = false;
+    state.buttonEnable = false;
+    state.spriteEnable = false;
+    state.dialogueEnable = false;
+
     initAssets();
 }
 
@@ -80,7 +85,6 @@ Affichage::~Affichage(){
 bool Affichage::initAssets(){
     createBackground();
     createDialogue();
-    createSprites();
 
     return true;
 }
@@ -123,9 +127,16 @@ void Affichage::renderBackground(){
     SDL_RenderCopy(renderer, backgroundTexture, NULL, &descRect);
 }
 
-void Affichage::createSprites(){
+void Affichage::createSprites(string path, int place){
+    cout << "Chargement du sprite : " << path << endl;
+    int l = path.length();
+    char * char_sprite = new char[l + 1];
+    strcpy(char_sprite, path.c_str());
+
     Sprite s;
-    SDL_Surface *sprite_surf = IMG_Load("data/sprite/squelette.png");
+    SDL_Surface *sprite_surf = IMG_Load(char_sprite);
+    if(sprite_surf == NULL){cout << "Erreur lors du chargement du sprite" << path << SDL_GetError() << endl;}
+    delete [] char_sprite;
 
     s.texture = SDL_CreateTextureFromSurface(renderer, sprite_surf);
     SDL_FreeSurface(sprite_surf);
@@ -133,9 +144,16 @@ void Affichage::createSprites(){
     s.descRect.w = sprite_surf->w / 2;
     s.descRect.h = sprite_surf->h / 2;
     s.descRect.x = w / 10;
-    s.descRect.y = (7 * h / 10 ) - s.descRect.h;
+    s.descRect.y = (place * 130) + 50 ;
 
     vectSprite.push_back(s);
+}
+
+void Affichage::deleteSprites(){
+    for(size_t i = 0; i < vectSprite.size(); i++){
+       SDL_DestroyTexture(vectSprite[i].texture);
+    }
+    vectSprite.clear();
 }
 
 void Affichage::renderSprites(){
@@ -144,10 +162,13 @@ void Affichage::renderSprites(){
     }
 }
 
-void Affichage::createButton(int x, int y, char * txt){
+void Affichage::createButton(int x, int y, string txt){
     Button b;
 
-    b.texte = txt;
+    char * c = new char[txt.size() + 1];
+    strcpy(c, txt.c_str());
+
+    b.texte = c;
     b.descRect.x = x;
     b.descRect.y = y;
     b.descRect.w = 200;
@@ -160,7 +181,6 @@ void Affichage::createButton(int x, int y, char * txt){
     SDL_FreeSurface(surface);
 
     vectButton.push_back(b);
-    cout << vectButton.size() << endl;
 }
 
 void Affichage::deleteButton(){
@@ -204,32 +224,35 @@ void Affichage::renderDialogue(){
     SDL_RenderCopy(renderer, dialogueTexture, NULL, &descRect);
 }
 
-void Affichage::afficherTexteDialogue(const char * txt){
-    SDL_Surface * surfaceMessage = TTF_RenderText_Solid(font24, txt, SDL_Color {255, 255, 255});
-    SDL_Texture * message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
+void Affichage::createTexte(string str, int fontSize, int x, int y){
+    char * c = new char[str.size() + 1];
+    strcpy(c, str.c_str());
+
+    SDL_Surface * surfaceMessage;
+
+    if(fontSize == 16) surfaceMessage = TTF_RenderText_Blended_Wrapped(font16, c, SDL_Color {255, 255, 255}, 968);
+    if(fontSize == 24) surfaceMessage = TTF_RenderText_Solid(font24, c, SDL_Color {255, 255, 255});
+    if(fontSize == 64) surfaceMessage = TTF_RenderText_Solid(font64, c, SDL_Color {255, 255, 255});
+
+    if(surfaceMessage == NULL) surfaceMessage = TTF_RenderText_Solid(font16, c, SDL_Color {255, 255, 255});
+
+    texte.texture = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
     SDL_FreeSurface(surfaceMessage);
 
-    SDL_Rect message_rect;
-    message_rect.w = surfaceMessage->w;
-    message_rect.h = surfaceMessage->h;
-    message_rect.x = (w - 1144) + 20;
-    message_rect.y = (h - 158) + 20;
-
-    SDL_RenderCopy(renderer, message, NULL, &message_rect);
+    
+    texte.diaRect.w = surfaceMessage->w;
+    texte.diaRect.h = surfaceMessage->h;
+    texte.diaRect.x = x - (texte.diaRect.w / 2);
+    texte.diaRect.y = y - (texte.diaRect.h / 2);
 }
 
-void Affichage::afficherTexteTitre(const char * txt){
-    SDL_Surface * surfaceMessage = TTF_RenderText_Solid(font64, txt, SDL_Color {255, 255, 255});
-    SDL_Texture * message = SDL_CreateTextureFromSurface(renderer, surfaceMessage);
-    SDL_FreeSurface(surfaceMessage);
+void Affichage::deleteTexte(){
+    SDL_DestroyTexture(texte.texture);
+    texte.texture = NULL;
+}
 
-    SDL_Rect message_rect;
-    message_rect.w = surfaceMessage->w;
-    message_rect.h = surfaceMessage->h;
-    message_rect.x = (w / 2) - (message_rect.w / 2);
-    message_rect.y = (h / 2) - (message_rect.h / 2);
-
-    SDL_RenderCopy(renderer, message, NULL, &message_rect);
+void Affichage::renderTexte(){
+    SDL_RenderCopy(renderer, texte.texture, NULL, &texte.diaRect);
 }
 
 int Affichage::buttonIsClicked(SDL_Event * e){
@@ -240,19 +263,59 @@ int Affichage::buttonIsClicked(SDL_Event * e){
         SDL_Rect r = vectButton[i].descRect;
 
         if((x > r.x && x < r.x + r.w) && (y > r.y && y < r.y + r.h)){
-            return i;
+            return i + 1;
         }
     }
 
     return 0;
 }
 
-bool Affichage::animateSprite(){
-    vectSprite[0].descRect.x += 20;
-    return true;
+void Affichage::animateSprite(int i){
+    int fps = 60;
+    int dd = 1000 / 60;
+
+    while(vectSprite[i].descRect.x < w / 2){
+        int startLoop = SDL_GetTicks64();
+
+        render();
+        vectSprite[i].descRect.x += 20;
+
+        int delta = SDL_GetTicks64() - startLoop;
+        if(delta < dd){
+            SDL_Delay(dd - delta);
+        }
+    }
+
+    SDL_Delay(1000);
+
+    while(vectSprite[i].descRect.x >= w / 10){
+        int startLoop = SDL_GetTicks64();
+        
+        render();
+        vectSprite[i].descRect.x -= 20;
+
+        int delta = SDL_GetTicks64() - startLoop;
+        if(delta < dd){
+            SDL_Delay(dd - delta);
+        }
+    }
 }
 
-void Affichage::render(){    
+void Affichage::render(){ 
+    if(state.backgoundEnable){
+        renderBackground();
+    }else{
+        gameStartBG();
+    }
+
+    if(state.spriteEnable) renderSprites();
+
+    if(state.buttonEnable) renderButtons();
+
+    if(state.dialogueEnable) renderDialogue();
+
+    if(state.texteEnable) renderTexte();
+
     SDL_RenderPresent(renderer);
     SDL_RenderClear(renderer);
 }

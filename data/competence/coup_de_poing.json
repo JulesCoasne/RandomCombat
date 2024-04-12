@@ -1,5 +1,6 @@
 {
-    "nom": "coup de poing",
-    "degat": 5,
-    "soin": 0
+    "nom": "Coup de poing",
+    "degat": 3,
+    "soin": 0,
+    "stat" : "force"
 }

@@ -3,8 +3,11 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <iostream>
+#include <cstring>
 #include <string>
 #include <vector>
+
+using namespace std;
 
 struct Sprite{
     SDL_Texture* texture;
@@ -15,6 +18,19 @@ struct Button{
     char * texte;
     SDL_Texture* texture;
     SDL_Rect descRect;
+};
+
+struct Texte{
+    SDL_Texture * texture;
+    SDL_Rect diaRect;
+};
+
+struct stateManagerAffichage{
+    bool backgoundEnable;
+    bool buttonEnable;
+    bool spriteEnable;
+    bool dialogueEnable;
+    bool texteEnable;
 };
 
 class Affichage {
@@ -34,8 +50,12 @@ private:
     SDL_Texture * dialogueTexture;
     std::vector<Sprite> vectSprite;
     std::vector<Button> vectButton;
+
+    Texte texte;
     
 public:
+    stateManagerAffichage state;
+
     Affichage();
     ~Affichage();
     bool initAssets();
@@ -45,24 +65,25 @@ public:
     void createBackground();
     void renderBackground();
 
-    void createSprites();
+    void createSprites(string path, int place);
+    void deleteSprites();
     void renderSprites();
 
-    void createButton(int x, int y, char * txt);
+    void createButton(int x, int y, string txt);
     void deleteButton();
     void renderButtons();
 
     void createDialogue();
     void renderDialogue();
 
-    void afficherTexteButton(const char * txt, int x, int y);
-    void afficherTexteDialogue(const char * txt);
-    void afficherTexteTitre(const char * txt);
+    void createTexte(string str, int fontSize, int x, int y);
+    void deleteTexte();
+    void renderTexte();
 
     int buttonIsClicked(SDL_Event * e);
 
     void render();
-    bool animateSprite();
+    void animateSprite(int i);
 };
 
 

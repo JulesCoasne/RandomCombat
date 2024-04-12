@@ -1,9 +1,4 @@
 #include "Competence.h"
-#include "Personnage.h"
-#include "../lib/json.hpp"
-#include <string>
-#include <iostream>
-#include <fstream>
 
 using namespace std;
 using json = nlohmann::json;
@@ -39,6 +34,8 @@ Competence::Competence(nomCompetence c) {
     nom = jsonData["nom"];
     degat = jsonData["degat"];
     soin = jsonData["soin"];
+    if(jsonData["stat"] == "force") type = FORCE;
+    if(jsonData["stat"] == "intelligence") type = INTELLIGENCE;
 }
 
 string Competence::getNom() const {
@@ -53,7 +50,6 @@ int Competence::getSoin() const {
     return soin;
 }
 
-void Competence::useCompetence(Personnage &p, int force) {
-    p.updatePV(-(degat * force));
-    p.updatePV(soin);
+int Competence::getType() const{
+    return type;
 }

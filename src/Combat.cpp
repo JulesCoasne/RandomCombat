@@ -2,62 +2,58 @@
 
 using namespace std;
 
-Combat::Combat(vector<Ennemi> e, Personnage * j): tabEnnemi(e), joueur(j), nbTour(0){}
+Combat::Combat(vector<Ennemi> &e, Personnage &j): tabEnnemi(e), joueur(j), nbTour(0){}
 
 Combat::~Combat(){}
 
-int Combat::deroulerCombat(){
-    int ennemiRestant = tabEnnemi.size();
-    if(tour()){
-        
+string Combat::attaque(int choixCompetence, int choixEnnemi){
+    int degat = 0;
+
+    if(joueur.getCompetence(choixCompetence).getType() == 0){
+        degat = joueur.getCompetence(choixCompetence).getDegat() * joueur.getForce();
     }
+
+    if(joueur.getCompetence(choixCompetence).getType() == 1){
+        degat = joueur.getCompetence(choixCompetence).getDegat() * joueur.getIntelligence();
+    }
+
+    int degatRecu = tabEnnemi[choixEnnemi].prendDegat(degat);
+
+    string str = tabEnnemi[choixEnnemi].getNom() + " prend " + to_string(degatRecu) + " de degat(s) !";
+    str.append(" Il reste " + to_string(tabEnnemi[choixEnnemi].getPV()) + " PV a " + tabEnnemi[choixEnnemi].getNom() + " ");
+    if(tabEnnemi[choixEnnemi].isDead()) str += tabEnnemi[choixEnnemi].getNom() + " est mort(e) !";
+
+    return str;
 }
 
-bool Combat::attaque(){
-    vector<Competence> c = joueur->getTabCompetence();
-    bool aJouer = false;
-    int choixCompetence, choixEnnemi;
-    
-    while(!aJouer){
-        if(choixCompetence == 0) return 0;
-        int degat = c[choixCompetence].getDegat() * joueur->getForce();
+string Combat::tourEnnemi(Affichage &affichage){
+    int degatRecu = 0;
+    int e = 0;
 
-        if(choixEnnemi != 0){
-            tabEnnemi[choixEnnemi].prendDegat(degat);
-            aJouer = true;
+    vector<int> ennemiAlive;
+
+    for(size_t i = 0; i < tabEnnemi.size(); i++){
+        if(!tabEnnemi[i].isDead()){
+            ennemiAlive.push_back(i);
         }
     }
+
+    srand(time(NULL));
+    e = rand() % ennemiAlive.size();
+
+    int degat = tabEnnemi[e].getForce();
+    degatRecu = joueur.takeDamage(degat);
+
+    affichage.animateSprite(e);
+
+    string str = "Vous prenez " + to_string(degatRecu) + " degat(s) ! " + "Il vous reste " + to_string(joueur.getPV()) + " PV ! ";
+    
+    if(joueur.isDead()){
+        str += " Vous êtes mort(e)...";
+    }
+
+    return str;
 }
 
 int Combat::consommable(){
-    bool aJouer = false;
-    int choixConsommable;
-
-    while(!aJouer){
-        if(choixConsommable == 0) return 0;
-        else{
-            //usedConsommable:joueur->useConsommable(choixConsommable);
-            aJouer = true;
-        }
-    }
 }
-
-//event: 1 = Attaque - 2 = Consommable - 3 = Consulter les ennemies - 4 = Abandonner
-bool Combat::tour(){
-    bool aJouer = false;
-    int event;
-
-    nbTour++;
-
-    while(!aJouer){
-        if(event == 1) aJouer = attaque();
-        if(event == 2) aJouer = consommable();
-        //if(event == 3) consultEnnemi();
-        //if(event == 4){
-        //    if(abandonner()){
-        //        return false;
-        //    }
-        //}
-    }
-    return true;
-} 
