@@ -6,15 +6,15 @@ Projet de l'UE LIFAPCD par COASNE Jules and ALOUI Chahd
 
 - [Compilation du projet](#compilation-du-projet)
   
-  - [Les librairies](##les-librairies)
+  - [Les librairies](#les-librairies)
 
 - [Lancer le projet](#lancer-le-projet)
 
 - [Déroulement d'une partie](#déroulement-dune-partie)
   
-  - [Lancement du jeu](##lancement-du-jeu)
+  - [Lancement du jeu](#lancement-du-jeu)
   
-  - [Les combats](##les-combats)
+  - [Les combats](#les-combats)
 
 # Description du projet
 
