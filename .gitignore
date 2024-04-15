@@ -2,6 +2,3 @@ bin/*
 obj/*
 *.o
 .vscode
-
-!bin/
-!obj/
