@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Combat::Combat(vector<Ennemi> &e, Personnage &j): tabEnnemi(e), joueur(j), nbTour(0){}
+Combat::Combat(vector<Ennemi> &e, Personnage &j): tabEnnemi(e), joueur(j){}
 
 Combat::~Combat(){}
 

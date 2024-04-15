@@ -18,6 +18,7 @@ Personnage::Personnage(classePersonnage c){
         resistance = 20;
         intelligence = 5;
         addCompetence(Competence::COUP_DE_POING);
+        addCompetence(Competence::COUP_EPEE);
         addConsommable(Consommable::POTION);
         cout << "fin" << endl;
     }
@@ -29,9 +30,16 @@ Personnage::Personnage(classePersonnage c){
         force = 10;
         resistance = 5;
         intelligence = 30;
-        addCompetence(Competence::BOULLE_DE_FEU);
+        addCompetence(Competence::BOULE_DE_FEU);
+        addCompetence(Competence::ECLAIRE);
         addConsommable(Consommable::POTION);
     }
+}
+
+Personnage::~Personnage(){
+    nom.clear();
+    tabCompetence.clear();
+    tabConsommable.clear();
 }
 
 std::string Personnage::getNom() const {

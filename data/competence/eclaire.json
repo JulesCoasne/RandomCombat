@@ -1,6 +1,6 @@
 {  
-    "nom": "Boulle de feu",
-    "degat": 3,
+    "nom": "Eclaire",
+    "degat": 5,
     "soin": 0,
     "stat": "intelligence"
 }

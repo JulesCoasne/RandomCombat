@@ -8,6 +8,8 @@ Projet de l'UE LIFAPCD par COASNE Jules and ALOUI Chahd
   
   - [Les librairies](#les-librairies)
 
+- [Doxygen](#doxygen)
+
 - [Lancer le projet](#lancer-le-projet)
 
 - [Déroulement d'une partie](#déroulement-dune-partie)
@@ -29,11 +31,31 @@ cd RandomCombat
 make
 ```
 
+Vous pouvez aussi supprimer les fichiers objets afin de compiler de 0
+
+```bash
+make clean
+```
+
 ## Les librairies
 
 La librairie [SDL2](https://www.libsdl.org/) est nécessaire pour compiler le projet.
 
 La librairie d'ouverture des `.json`, [GitHub - nlohmann/json: JSON for Modern C++](https://github.com/nlohmann/json), est fournis dans le dossier `lib`
+
+# Doxygen
+
+Simplement lancer la commande
+
+```bash
+make doc
+```
+
+Vous pouvez aussi supprimer la documentation avec
+
+```bash
+make cleandoc
+```
 
 # Lancer le projet
 
@@ -41,7 +63,7 @@ Lancer le projet depuis la racine
 
 ```bash
 cd RandomCombat
-bin/RandomCombat
+make run
 ```
 
 # Déroulement d'une partie

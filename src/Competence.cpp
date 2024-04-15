@@ -3,17 +3,7 @@
 using namespace std;
 using json = nlohmann::json;
 
-Competence::Competence() : degat(0), soin(0) {}
-
-Competence::Competence(int stat, bool estSoin) {
-    if (estSoin) {
-        soin = stat;
-        degat = 0;
-    } else {
-        soin = 0;
-        degat = stat;
-    }
-}
+Competence::Competence(){}
 
 Competence::Competence(nomCompetence c) {
     string path = filePath + jsonCompetence[c];

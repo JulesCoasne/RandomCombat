@@ -3,7 +3,6 @@
 #include "Ennemi.h"
 #include "Competence.h"
 #include "Consommable.h"
-#include "Equipement.h"
 #include <vector>
 
 Affichage affichage;
@@ -214,13 +213,15 @@ void recompenseFinCombat(){
         str = "Vous gagner un(e) ";
         srand(time(NULL) + 1);
 
-        int cons = rand() % Consommable::Count;
+        int cons = rand() % 3;
 
         if(joueur.getTabConsommable().size() >= 4){
             joueur.getTabConsommable().erase(joueur.getTabConsommable().begin());
         }
 
         joueur.getTabConsommable().push_back(Consommable(cons));
+
+        str += Consommable(cons).getNom();
     }
 
     affichage.state.backgoundEnable = false;
