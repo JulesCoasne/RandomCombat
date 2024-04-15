@@ -26,6 +26,22 @@ string Combat::attaque(int choixCompetence, int choixEnnemi){
     return str;
 }
 
+string Combat::consommable(int choixConsommable){
+    vector<Consommable> * v = joueur.getPtrTabConsommable();
+
+    int heal = joueur.getConsommable(choixConsommable).getPV();
+
+    joueur.updatePV(heal);
+
+    string str = "Vous vous êtes soignée de " + to_string(heal) + " PV. Vous avez maintenant " + to_string(joueur.getPV()) + " PV.";
+
+    cout << str << endl;
+
+    v->erase(v->begin() + choixConsommable);
+
+    return str;
+}
+
 string Combat::tourEnnemi(Affichage &affichage){
     int degatRecu = 0;
     int e = 0;
@@ -44,7 +60,7 @@ string Combat::tourEnnemi(Affichage &affichage){
     int degat = tabEnnemi[e].getForce();
     degatRecu = joueur.takeDamage(degat);
 
-    affichage.animateSprite(e);
+    affichage.attackAnimation(e);
 
     string str = "Vous prenez " + to_string(degatRecu) + " degat(s) ! " + "Il vous reste " + to_string(joueur.getPV()) + " PV ! ";
     
@@ -53,7 +69,4 @@ string Combat::tourEnnemi(Affichage &affichage){
     }
 
     return str;
-}
-
-int Combat::consommable(){
 }

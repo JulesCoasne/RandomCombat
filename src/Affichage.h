@@ -83,7 +83,9 @@ public:
     int buttonIsClicked(SDL_Event * e);
 
     void render();
-    void animateSprite(int i);
+
+    void attackAnimation(int i);
+    void damageAnimation(int i);
 };
 
 

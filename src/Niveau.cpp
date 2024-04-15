@@ -5,7 +5,6 @@ using namespace std;
 Niveau::Niveau(){
     combat = nullptr;
     numNiveau = 1;
-    nbEnnemi = 0;
 }
 
 Niveau::~Niveau() {
@@ -14,50 +13,52 @@ Niveau::~Niveau() {
 }
 
 void Niveau::generateTabEnnemi(){
-    srand(time(NULL));
+    int nbEnnemi;
 
     if(numNiveau <= 2){
         nbEnnemi = rand() % 2 + 1;
 
         for(int i = 0; i < nbEnnemi; i++){
-            srand(time(NULL));
+            srand(time(NULL) + i);
 
-            int ennemi = rand() % 3;
+            int ennemi = rand() % ennemiFacile.size();
             tabEnnemi.push_back(Ennemi(ennemiFacile[ennemi]));
         }
     }
 
     if(numNiveau > 2){
-        nbEnnemi = rand() % 4 + 2;
+        nbEnnemi = rand() % 3 + 2;
 
         for(int i = 0; i < nbEnnemi; i++){
-            srand(time(NULL));
+            srand(time(NULL) + i);
 
-            int ennemi = rand() % 3;
+            int ennemi = rand() % ennemiFacile.size();
             tabEnnemi.push_back(Ennemi(ennemiFacile[ennemi]));
         }
     }
 }
 
-void Niveau::checkEnnemiStatus(Affichage& affichage){
+void Niveau::createEnnemisSprites(Affichage& affichage){
     affichage.deleteSprites();
-
-    for(size_t i = 0; i < tabEnnemi.size(); i++){
-        if(tabEnnemi[i].isDead() == false){
-            affichage.createSprites(tabEnnemi[i].getSprite(), i);
-        }else{
-            nbEnnemi--;
-        }
-    }
-}
-
-void Niveau::nouveauCombat(Affichage& affichage, Personnage &joueur){
-    affichage.deleteSprites();
-    generateTabEnnemi();
-    combat = new Combat(tabEnnemi, joueur);
     for(size_t i = 0; i < tabEnnemi.size(); i++){
         affichage.createSprites(tabEnnemi[i].getSprite(), i);
     }
+}
+
+void Niveau::checkEnnemiStatus(Affichage& affichage){
+    for(size_t i = 0; i < tabEnnemi.size(); i++){
+        if(tabEnnemi[i].isDead()){
+            tabEnnemi.erase(tabEnnemi.begin() + i);
+        }
+    }
+
+    createEnnemisSprites(affichage);
+}
+
+void Niveau::nouveauCombat(Affichage& affichage, Personnage &joueur){
+    generateTabEnnemi();
+    createEnnemisSprites(affichage);
+    combat = new Combat(tabEnnemi, joueur);
 }
 
 void Niveau::levelCleared(){
@@ -75,8 +76,4 @@ vector<Ennemi> * Niveau::getTabEnnemi(){
 
 Ennemi Niveau::getEnnemi(int i){
     return tabEnnemi[i];
-}
-
-int Niveau::getNbEnnemi(){
-    return nbEnnemi;
 }

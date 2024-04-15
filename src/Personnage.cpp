@@ -10,21 +10,27 @@ Personnage::Personnage(const std::string &nom) : nom(nom), pv(100), force(10), r
 
 Personnage::Personnage(classePersonnage c){
     if(c == GUERRIER){
+        cout << "début" << endl;
         nom = "Guerrier";
         pv = 200;
+        pvMax = 200;
         force = 20;
         resistance = 20;
         intelligence = 5;
         addCompetence(Competence::COUP_DE_POING);
+        addConsommable(Consommable::POTION);
+        cout << "fin" << endl;
     }
 
     if(c == MAGE){
         nom = "Mage";
         pv = 100;
+        pvMax = 200;
         force = 10;
         resistance = 5;
         intelligence = 30;
         addCompetence(Competence::BOULLE_DE_FEU);
+        addConsommable(Consommable::POTION);
     }
 }
 
@@ -34,6 +40,10 @@ std::string Personnage::getNom() const {
 
 int Personnage::getPV() const {
     return pv;
+}
+
+int Personnage::getPVMax() const {
+    return pvMax;
 }
 
 int Personnage::getForce() const {
@@ -54,9 +64,12 @@ void Personnage::updateNom(string update){
 
 void Personnage::updatePV(int update) {
     pv += update;
-    if (pv < 0) {
-        pv = 0;
-    }
+    if (pv < 0) pv = 0;
+    if (pv > pvMax) pv = pvMax;
+}
+
+void Personnage::updatePVMax(int update){
+    pvMax += update;
 }
 
 int Personnage::takeDamage(int degat){
@@ -75,6 +88,10 @@ void Personnage::updateForce(int update) {
     force += update;
 }
 
+void Personnage::updateIntelligence(int update){
+    intelligence += update;
+}
+
 void Personnage::updateResistance(int update) {
     resistance += update;
 }
@@ -87,10 +104,26 @@ Competence Personnage::getCompetence(int index) const{
     return tabCompetence[index];
 }
 
-vector<Competence> Personnage::getTabCompetence() const{
+Consommable Personnage::getConsommable(int index) const{
+    return tabConsommable[index];
+}
+
+vector<Consommable> * Personnage::getPtrTabConsommable(){
+    return &tabConsommable;
+}
+
+vector<Competence> Personnage::getTabCompetence(){
     return tabCompetence;
 }
 
 void Personnage::addCompetence(Competence::nomCompetence c){
     tabCompetence.push_back(Competence(c));
+}
+
+void Personnage::addConsommable(Consommable::nomConsommable c){
+    tabConsommable.push_back(Consommable(c));
+}
+
+vector<Consommable> Personnage::getTabConsommable(){
+    return tabConsommable;
 }

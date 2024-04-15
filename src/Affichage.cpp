@@ -270,7 +270,7 @@ int Affichage::buttonIsClicked(SDL_Event * e){
     return 0;
 }
 
-void Affichage::animateSprite(int i){
+void Affichage::attackAnimation(int i){
     int fps = 60;
     int dd = 1000 / 60;
 
@@ -298,6 +298,40 @@ void Affichage::animateSprite(int i){
         if(delta < dd){
             SDL_Delay(dd - delta);
         }
+    }
+}
+
+void Affichage::damageAnimation(int i){
+    int r = 0;
+    int fps = 60;
+    int dd = 1000 / 60;
+
+    while(r < 5){
+        if(r % 2 == 0){
+            for(int j = 0; j <= 10; j++){
+                int startLoop = SDL_GetTicks64();
+                render();
+                vectSprite[i].descRect.x += 2;
+                int delta = SDL_GetTicks64() - startLoop;
+                if(delta < dd){
+                    SDL_Delay(dd - delta);
+                }
+            }
+        }
+
+        if(r % 2 != 0){
+            for(int j = 0; j <= 10; j++){
+                int startLoop = SDL_GetTicks64();
+                render();
+                vectSprite[i].descRect.x -= 2;
+                int delta = SDL_GetTicks64() - startLoop;
+                if(delta < dd){
+                    SDL_Delay(dd - delta);
+                }
+            }
+        }
+
+        r++;
     }
 }
 

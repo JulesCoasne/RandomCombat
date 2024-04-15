@@ -15,7 +15,6 @@ using namespace std;
 class Niveau {
 private:
     int numNiveau;
-    int nbEnnemi;
     vector<Ennemi> tabEnnemi;
     vector<Ennemi::nomEnnemi> ennemiFacile = {Ennemi::SQUELETTE, Ennemi::CHAUVE_SOURIS, Ennemi::PIRATE};
 
@@ -27,6 +26,7 @@ public:
 
     void generateTabEnnemi();
     void checkEnnemiStatus(Affichage& affichage);
+    void createEnnemisSprites(Affichage& affichage);
     void nouveauCombat(Affichage& affichage, Personnage &joueur);
     void levelCleared();
 
@@ -34,7 +34,6 @@ public:
 
     vector<Ennemi> * getTabEnnemi();
     Ennemi getEnnemi(int i);
-    int getNbEnnemi();
 };
 
 #endif // NIVEAU_H

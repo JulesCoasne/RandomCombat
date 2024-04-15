@@ -27,7 +27,7 @@ class Combat{
         int deroulerCombat();
         string attaque(int choixCompetence, int choixEnnemi);
         string tourEnnemi(Affichage &affichage);
-        int consommable();
+        string consommable(int choixConsommable);
         int consultEnnemi();
         int abandonner();
 };
